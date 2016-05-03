@@ -1,0 +1,84 @@
+% 
+% (c) Copyright 2016 Tabea Mendez
+% 
+% This source is free: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This source is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this source.  If not, see <http://www.gnu.org/licenses/>.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{header}
+\makeindex
+\makeglossary
+\newcommand{\autor}{\copyright Tabea Méndez}
+\author{\autor}
+\newcommand{\titel}{Digitale Signalverarbeitung HS13/FS14}
+\title{\titel}
+
+\usepackage[parfill]{parskip}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{trfsigns}
+\usepackage{pdflscape}
+\usepackage{trfsigns}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{array}
+
+
+\include{definitions}
+\newcommand{\asinh}{\operatorname{arsinh}}
+\newcommand{\acosh}{\operatorname{arcosh}}
+\newcommand{\atanh}{\operatorname{artanh}}
+\newcommand{\arccot}{\operatorname{arccot}}
+\newcommand{\erf}{\operatorname{erf}}
+\renewcommand{\d}{\partial}
+\newcommand{\Dv}{\operatorname{D}_{\vec{v}}}
+\newcommand{\ddvec}[2]{\renewcommand{\arraystretch}{1}\begin{pmatrix}\d #1\\ \d #2 \end{pmatrix}}
+\newcommand{\dddvec}[3]{\renewcommand{\arraystretch}{1}\begin{pmatrix}\d #1\\ \d #2 \\ \d #3 \end{pmatrix}}
+\newcommand{\lap}{\triangle}
+\newcommand{\ever}{\overset{!}{=}}
+\newenvironment{danger}{
+	\begin{tabular}{m{1cm}|m{\textwidth-1.7cm}}
+		\includegraphics[width=1cm]{achtung.pdf} & \textbf{Achtung:}\newline}{
+	\end{tabular}\newline
+}
+\newenvironment{info}{
+	\begin{tabular}{m{0.7cm}m{\textwidth-1.7cm}}
+		\includegraphics[width=0.7cm]{info.pdf} &}{
+	\end{tabular}\newline
+}
+\newenvironment{goal}{
+	\begin{tabular}{m{1.5cm}|m{\textwidth-2cm}}
+		\includegraphics[width=1.5cm]{Ziel.pdf} & \textbf{Ziel:}\newline}{
+	\end{tabular}\newline
+}
+\newenvironment{example}{
+	\begin{tabular}{b{0.7cm}b{\textwidth-1.7cm}}
+		\includegraphics[width=0.7cm]{example.pdf} & \color{CadetBlue}\large \sf \textbf{Beispiel}\color{black}\normalsize\normalfont\\\hline &}{
+	\\\hline\end{tabular}\newline
+}
+
+\begin{document}
+\include{title}
+\newpage
+\pagestyle{scrheadings}
+\tableofcontents
+\newpage
+
+\include{main}
+
+\newpage
+\renewcommand{\indexname}{Stichwortverzeichnis}
+
+
+\end{document}

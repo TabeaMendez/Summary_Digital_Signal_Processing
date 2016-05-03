@@ -1,0 +1,134 @@
+% 
+% (c) Copyright 2016 Tabea Mendez
+% 
+% This source is free: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This source is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this source.  If not, see <http://www.gnu.org/licenses/>.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tikzpicture}[>=latex', scale=1.1]
+\def\s{0.3};
+\def\l{1.4};
+\def\dh{0.8};
+\def\dv{0.6};
+
+	% Erste Abteilung	
+	\begin{scope}[yshift=0.5cm]
+		\coordinate (m) at (-\s-\l,0);
+		\draw[line width=1](-\l,0)--node[above]{\footnotesize$x'(n')$}node[below]{\footnotesize$f_s'$}++(\l,0);
+
+
+		\coordinate (np) at (0,0);
+		\draw[line width=1,->](np)--++(\dh,0);
+		\draw[line width=1,->](np)--++(0,-2*\dv-0.5)--++(\dh,0)node[xshift=-1.8cm]{\Large$\ast$}node[xshift=-1.8cm,yshift=1.1cm]{\Large$\ast$};
+
+		\coordinate (m) at (0,-\dv-0.5);
+		\draw[line width=1,fill=white](m)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(m)[xshift=0pt]{\small$\zeta^{\text{-}1}$};
+
+		\coordinate (m) at (\dh,0);
+		\draw[line width=1,fill=white](m)--++(0,1.1*\s)--++(2.1*\s,-1.1*\s)--++(-2.1*\s,-1.1*\s)--cyclenode at(m)[right, xshift=5pt,yshift=11pt]{\small$h_{0}$};
+		\coordinate (m) at (\dh,-2*\dv-0.5);
+		\draw[line width=1,fill=white](m)--++(0,1.1*\s)--++(2.1*\s,-1.1*\s)--++(-2.1*\s,-1.1*\s)--cyclenode at(m)[right, xshift=5pt,yshift=11pt]{\small$h_{1}$};
+
+		\draw[line width=1](np)++(\dh+2*\s,0)--(2.5*\dh+2*\s,0);
+		\draw[line width=1](np)++(\dh+2*\s,-2*\dv-0.5)--++(0.9*\dh,0)--(2.5*\dh+2*\s,0);
+
+		\draw[line width=1,->](np)++(2.5*\dh+2*\s,0)--node[above]{\footnotesize$y'(n')$}node[below]{\footnotesize$f_s'$}++(1.2*\l,0);
+
+		\draw[line width=1,->](2.5*\dh+4*\s+1.2*\l,0)--node[above]{\footnotesize$y_{down}(n)$}node[below]{\footnotesize$f_s$}++(1.2*\l,0);
+		\coordinate (m) at (2.5*\dh+3*\s+1.2*\l,0);
+		\draw[line width=1,fill=white](m)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(m)[xshift=-3.5pt]{\small$\downarrow$};
+		\node at(m)[xshift=2.5pt]{\small$L$};
+	
+		\foreach \i in {0,1,2,3}
+		{
+			\coordinate (m) at (2.5*\dh+3*\s+1.2*\l,-\i*1.7);
+% 			\node at(m)[xshift=-1.25cm,yshift=-1cm,CadetRed]{\Large$\bm\ast$};
+			\node at(m)[xshift=-1.25cm,yshift=-1.4cm]{\Large$\ast$};
+			\node at(m)[xshift=-1.25cm,yshift=-1.8cm]{$\vdots$};
+			\node at(m)[xshift=-1.25cm,yshift=-2.45cm]{\Large$\ast$};
+		}
+		\node at(m)[xshift=-1.25cm,yshift=-2.45cm,fill,white]{\Large$\ast$};
+
+			\coordinate (m) at (2.5*\dh+3*\s+1.2*\l,-0*1.7);
+			\node at(m)[xshift=-1.15cm,yshift=-1cm,CadetRed]{\Large$\bm\ast_{\text{\footnotesize$0$}}$};
+			\coordinate (m) at (2.5*\dh+3*\s+1.2*\l,-1*1.7);
+			\node at(m)[xshift=-1.12cm,yshift=-1cm,CadetRed]{\Large$\bm\ast_{\text{\footnotesize$L$}}$};
+			\coordinate (m) at (2.5*\dh+3*\s+1.2*\l,-2*1.7);
+			\node at(m)[xshift=-1.04cm,yshift=-1cm,CadetRed]{\Large$\bm\ast_{\text{\footnotesize$2L$}}$};
+			\coordinate (m) at (2.5*\dh+3*\s+1.2*\l,-3*1.7);
+			\node at(m)[xshift=-1.04cm,yshift=-1cm,CadetRed]{\Large$\bm\ast_{\text{\footnotesize$3L$}}$};
+
+		\coordinate (m) at (2.5*\dh+3*\s+1.2*\l,-0*0.37);
+		\node at(m)[xshift=1.35cm,yshift=-1cm,CadetRed]{\Large$\bm\ast_{\text{\footnotesize$0$}}$};
+		\coordinate (m) at (2.5*\dh+3*\s+1.2*\l,-1*0.37);
+		\node at(m)[xshift=1.38cm,yshift=-1cm,CadetRed]{\Large$\bm\ast_{\text{\footnotesize$L$}}$};
+		\coordinate (m) at (2.5*\dh+3*\s+1.2*\l,-2*0.37);
+		\node at(m)[xshift=1.465cm,yshift=-1cm,CadetRed]{\Large$\bm\ast_{\text{\footnotesize$2L$}}$};
+		\coordinate (m) at (2.5*\dh+3*\s+1.2*\l,-3*0.37);
+		\node at(m)[xshift=1.46cm,yshift=-1cm,CadetRed]{\Large$\bm\ast_{\text{\footnotesize$3L$}}$};
+		\node at(m)[xshift=1.25cm,yshift=-1.4cm]{$\vdots$};
+
+	\end{scope}
+
+	% Zeite Abteilung
+	\begin{scope}[yshift=-0.9cm]
+		\coordinate (np) at (0,0);
+		\draw[line width=1](np)++(0,-0.5*\dv)--++(0,{-(\dv-\s)});
+		\draw[line width=1](np)++(0,-1.5*\dv)--++(0,-5*\dv);
+		\draw[line width=1,->](np)++(0,-2.5*\dv)--++(\dh,0)node[xshift=-1.8cm]{\Large$\ast$};
+		\draw[line width=1,->](np)++(0,-4.5*\dv)--++(\dh,0)node[xshift=-1.8cm]{\Large$\ast$};
+		\draw[line width=1,->](np)++(0,-6.5*\dv)--++(\dh,0)node[xshift=-1.8cm]{\Large$\ast$};
+
+		\coordinate (m) at (0,-1.5*\dv);
+		\draw[line width=1,fill=white](m)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(m)[xshift=0pt]{\small$\zeta^{\text{-}1}$};
+		\coordinate (m) at (0,-3.5*\dv);
+		\draw[line width=1,fill=white](m)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(m)[xshift=0pt]{\small$\zeta^{\text{-}1}$};
+		\coordinate (m) at (0,-5.5*\dv);
+		\draw[line width=1,fill=white](m)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(m)[xshift=0pt]{\small$\zeta^{\text{-}1}$};
+
+		\coordinate (m) at (\dh,-2.5*\dv);
+		\draw[line width=1,fill=white](m)--++(0,1.1*\s)--++(2.1*\s,-1.1*\s)--++(-2.1*\s,-1.1*\s)--cyclenode at(m)[right, xshift=5pt,yshift=11pt]{\small$h_2$};
+		\coordinate (m) at (\dh,-4.5*\dv);
+		\draw[line width=1,fill=white](m)--++(0,1.1*\s)--++(2.1*\s,-1.1*\s)--++(-2.1*\s,-1.1*\s)--cyclenode at(m)[right, xshift=5pt,yshift=11pt]{\small$h_3$};
+		\coordinate (m) at (\dh,-6.5*\dv);
+		\draw[line width=1,fill=white](m)--++(0,1.1*\s)--++(2.1*\s,-1.1*\s)--++(-2.1*\s,-1.1*\s)--cyclenode at(m)[right, xshift=5pt,yshift=11pt]{\small$h_4$};
+
+		\draw[line width=1](np)++(\dh+2*\s,-2.5*\dv)--++(0.8*\dh,0)--(2.5*\dh+2*\s,1.4);
+		\draw[line width=1](np)++(\dh+2*\s,-4.5*\dv)--++(0.775*\dh,0)--(2.5*\dh+2*\s,1.4);
+		\draw[line width=1](np)++(\dh+2*\s,-6.5*\dv)--++(0.8*\dh,0)--(2.5*\dh+2*\s,1.4);
+
+	\end{scope}
+
+	\begin{scope}[yshift=-5.1cm]
+		\coordinate (np) at (0,0);
+		\draw[line width=1,dashed, dash phase=-0pt, dash pattern=on 3.2pt off 3pt](np)++(0,0.5*\dv)--++(0,{-(2*\dv-\s)});
+		\draw[line width=1,->](np)++(0,-1.5*\dv)--++(0,-1*\dv)--++(\dh,0)node[xshift=-1.8cm]{\Large$\ast$}node[xshift=-1.8cm,yshift=1.1cm]{\small$\vdots$};
+
+		\coordinate (m) at (0,-1.5*\dv);
+		\draw[line width=1,fill=white](m)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(m)[xshift=0pt]{\small$\zeta^{\text{-}1}$};
+
+
+		\coordinate (m) at (\dh,-2.5*\dv);
+		\draw[line width=1,fill=white](m)--++(0,1.1*\s)--++(2.1*\s,-1.1*\s)--++(-2.1*\s,-1.1*\s)--cyclenode at(m)[right, xshift=5pt,yshift=11pt]{\small$h_{2ML}$};
+
+		\draw[line width=1](m)++(2*\s,0)--++(0.85*\dh,0)--(2.5*\dh+2*\s,5.6);
+
+
+	\end{scope}
+
+
+	% Addirer
+	\draw[line width=1,white,fill](2.5*\dh+2*\s,0.5)circle(5.5pt)node[black]{\Large$\bigoplus$};
+
+
+\end{tikzpicture}

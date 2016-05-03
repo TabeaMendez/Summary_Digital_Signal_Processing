@@ -1,0 +1,492 @@
+% 
+% (c) Copyright 2016 Tabea Mendez
+% 
+% This source is free: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This source is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this source.  If not, see <http://www.gnu.org/licenses/>.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Analoge Signale}
+	\begin{minipage}{0.25\textwidth}
+		$ $
+	\end{minipage}
+	\begin{minipage}{0.4\textwidth}
+		\begin{tikzpicture}[>=latex', scale=1]
+			\begin{scope}[shift={(0,0)}]
+			\draw[line width=0.5](0,0.2)--(0,-0.2);
+			\filldraw[fill=white] (0,0.2)circle (2pt);
+			\filldraw[fill=black](0,-0.2)circle (2pt);
+			\end{scope}
+			\begin{scope}[shift={(2.7,0)}]
+			\draw[line width=0.5](0,0.2)--(0,-0.2);
+			\filldraw[fill=white] (0,0.2)circle (2pt);
+			\filldraw[fill=black](0,-0.2)circle (2pt);
+			\end{scope}
+			\begin{scope}[shift={(-2.7,0)}]
+			\draw[line width=0.5](0,0.2)--(0,-0.2);
+			\filldraw[fill=white] (0,0.2)circle (2pt);
+			\filldraw[fill=black](0,-0.2)circle (2pt);
+			\end{scope}
+			\draw[<-,line width=1](-1.2,0)--(-2.5,0)nodeat(-2.7,0.6){$x(t)$}nodeat(-2.7,-0.6){$X(\Omega)$};
+			\draw[->,line width=1](1.2,0)--(2.5,0)nodeat(2.7,0.6){$y(t)$}node at(2.7,-0.6){$Y(\Omega)$};
+			\draw[line width=1](-1.2,-1)--(-1.2,1)--(1.2,1)--(1.2,-1)--(-1.2,-1)node at (0,0.6){$h(t)$}node at (0,-0.6){$H(\Omega)$}node at (0,1.3){LTI};
+		\end{tikzpicture} 
+	\end{minipage}
+	\begin{minipage}{0.2\textwidth}
+		$ $\\[0.5cm]
+		\fcolorbox{CadetRed}{white}{$\Omega = 2\pi f$}$\quad$[$rad/s$]
+	\end{minipage}\\[0.2cm]
+
+	\begin{minipage}[t]{0.33\textwidth}
+		\textbf{Eingangssignal:}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$\begin{array}{l}
+		X(\Omega)=\myint{-\infty}{\infty}{x(t)\cdot \e^{-j\Omega t}}{t}\\[0.5cm]
+		x(t)=\dfrac{1}{2\pi}\myint{-\infty}{\infty}{X(\Omega)\cdot \e^{j\Omega t}}{\Omega}
+		\end{array}$}
+	\end{minipage}
+	\begin{minipage}[t]{0.33\textwidth}
+		\textbf{Impulsantwort: $h(t)$}\\[0.2cm]
+		\textbf{Übertragungsfunktion:}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$H(\Omega) = \myint{-\infty}{\infty}{h(t)\cdot \e^{-j\Omega t}}{t}$}
+	\end{minipage}
+	\begin{minipage}[t]{0.33\textwidth}
+		\textbf{Ausgangssignel:}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$\begin{array}{l}
+		Y(\Omega) =  H(\Omega)\cdot X(\Omega)\\[0.3cm]
+		y(t) = \myint{-\infty}{\infty}{h(t-\tau)\cdot x(\tau)}{\tau}
+		\end{array}$}                                              
+	\end{minipage}\\[0.2cm]
+	
+	\begin{minipage}[t]{0.45\textwidth}
+		\textbf{Amplituden- und Phasenänderung:}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$\begin{array}{c}
+		x(t) = \e^{j\Omega t}\\
+		\Downarrow\\
+		y(t) = |H(\Omega)|\cdot \e^{j\Omega t+ j\,arg(H(\Omega))}\\
+		\end{array}$}                                              
+	\end{minipage}
+	\begin{minipage}[t]{0.55\textwidth}
+		\textbf{Linearität:}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$\begin{array}{c}
+		x(t) = A_1\cdot\e^{j\Omega_1 t}+A_2\cdot\e^{j\Omega_2 t}\\
+		\Downarrow\\
+		y(t) = A_1\cdot H(\Omega_1)\cdot\e^{j\Omega_1 t}+A_2\cdot H(\Omega_2)\cdot\e^{j\Omega_2 t}\\
+		\end{array}$}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$\begin{array}{c}
+		X(\Omega) = 2\pi A_1\delta(\Omega-\Omega_1) + 2\pi A_2\delta(\Omega-\Omega_2)\\
+		\Downarrow\\
+		Y(\Omega) = 2\pi A_1 H(\Omega_1)\delta(\Omega-\Omega_1) + 2\pi A_2 H(\Omega_2)\delta(\Omega-\Omega_2)\\
+		\end{array}$}  
+	\end{minipage}
+
+\section{Abtasttheorem}
+	\begin{itemize}
+		\item Das Eingangssignal \textbf{muss bandbeschränkt} sein, damit es Aliasingfrei abgetastet werden kann\\
+		$|X(f)|\thickapprox 0\quad$ für $\quad f > f_s/2$\\[-0.3cm]
+		\item Wenn keine Überlappunng herrscht, kann das Signal $x(t)$ mit einem idealen Tiefpassfilter (Eckfrequenz $f_c = f_s/2$) wieder herausgefiltert werden.\\
+	\end{itemize}
+	
+	\begin{minipage}{0.3\textwidth}
+		\textbf{Nyquist-Shannon\\ Abtasttheorem:}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$f_s\geq 2\cdot f_{max}$}\\[0.3cm]
+		Abtastfrequenz: $\quad f_s = \dfrac{1}{T}$\\[2.5cm]
+	\end{minipage}
+	\begin{minipage}{0.7\textwidth}
+		\begin{tikzpicture}[>=latex', scale=0.9]
+			\begin{scope}[shift={(-12.5,0)}]
+			\draw[->][line width=0.75](2.5,-0.5)--(2.5,1.8)node[right]{$x(t)$};
+			\draw[->][line width=0.75](0,0)--(5,0)node[below]{$t$};
+			\node at (5.95,1) {\huge$\Rightarrow$};
+			\begin{scope}[shift={(0,0)}]
+			\draw[CadetRed, smooth,samples=100,domain=0:5, line width=1 ] plot (\x,{(\x+1-1.3*sin(2*\x*180/pi))/(\x+1)}) node[right] {$ $};
+			\end{scope}
+			\end{scope}
+			
+			\begin{scope}[shift={(-5.5,0)}]
+			\draw[->][line width=0.75](2.5,-0.5)--(2.5,1.8)node[right]{$x_s(nT)$};
+			\draw[->][line width=0.75](0,0)--(5.3,0)node[below]{$t$};
+			\draw[black, line width=0.5 ](3,0.3)--(3,-0.3);
+			\draw[black, line width=0.5,<-> ](2.5,-0.2)--(3,-0.2)node at(2.8,-0.2)[below]{$T$};
+			\begin{scope}[shift={(0,0)}]
+			\draw[CadetRed, smooth,samples=100,domain=0:5, line width=0.5,dashed ] plot (\x,{(\x+1-1.3*sin(2*\x*180/pi))/(\x+1)}) node[right] {$ $};
+			\draw[blueT, line width=1,fill ](0,0)--(0,1)circle(0.05);
+			\draw[blueT, line width=1,fill ](0.5,0)--(0.5,0.27073)circle(0.05);
+			\draw[blueT, line width=1,fill ](1,0)--(1,0.40896)circle(0.05);
+			\draw[blueT, line width=1,fill ](1.5,0)--(1.5,0.92662)circle(0.05);
+			\draw[blueT, line width=1,fill ](2,0)--(2,1.3279)circle(0.05);
+			\draw[blueT, line width=1,fill ](2.5,0)--(2.5,1.3562)circle(0.05);
+			\draw[blueT, line width=1,fill ](3,0)--(3,1.0908)circle(0.05);
+			\draw[blueT, line width=1,fill ](3.5,0)--(3.5,0.8102)circle(0.05);
+			\draw[blueT, line width=1,fill ](4,0)--(4,0.74277)circle(0.05);
+			\draw[blueT, line width=1,fill ](4.5,0)--(4.5,0.90259)circle(0.05);
+			\draw[blueT, line width=1,fill ](5,0)--(5,1.1179)circle(0.05);
+			\end{scope}
+			\end{scope}
+
+
+			\begin{scope}[shift={(-10,-3)}]
+			\draw[->][line width=0.75](0,-0.5)--(0,1.5)node[right]{$\left| X(f)\right|$};
+			\draw[->][line width=0.75](-1.5,0)--(1.5,0)node[below]{$f$};
+	% 			\node  at (2,1) {\Huge{$*$}};
+			\begin{scope}[shift={(0,0)}]
+			\draw[CadetRed, line width=1](-0.7,0)--(-0.3,1)--(0.3,1)--(0.7,0);
+			\draw[line width=0.75](0,0.2)--(0,-0.2)node[below]{$ $};
+			\draw[line width=0.75](0.7,0.2)--(0.7,-0.2)node[below]{$f_{max}$};
+			\draw[line width=0.75](-0.7,0.2)--(-0.7,-0.2)node[below]{$-f_{max}$};
+			\node at (3.45,1) {\huge$\Rightarrow$};
+			\draw[darkgray, line width=1,dashed](-0.8,0)--(-0.8,1.15)node[left]{\footnotesize prefilter}--(0.8,1.15)--(0.8,0);
+			\end{scope}
+			\end{scope}
+
+			\begin{scope}[shift={(-3,-3)}]
+			\draw[->][line width=0.75](0,-0.5)--(0,1.5)node[right]{$\left| X_s(f)\right|$};
+			\draw[->][line width=0.75](-2.5,0)--(2.8,0)node[below]{$f$};
+			\begin{scope}[shift={(0,0)}]
+			\draw[blueT, line width=1](-0.7,0)--(-0.3,1)--(0.3,1)--(0.7,0);
+			\draw[line width=0.75](0,0.2)--(0,-0.2)node[below]{$ $};
+			\draw[line width=0.75](1.6,0.2)--(1.6,-0.2)node[below]{$f_s$};
+			\draw[line width=0.75](-1.6,0.2)--(-1.6,-0.2)node[below]{$-f_s$};
+			\end{scope}
+			\begin{scope}[shift={(1.6,0)}]
+			\draw[blueT, line width=1](-0.7,0)--(-0.3,1)--(0.3,1)--(0.7,0);
+			\end{scope}
+			\begin{scope}[shift={(-1.6,0)}]
+			\draw[blueT, line width=1](-0.7,0)--(-0.3,1)--(0.3,1)--(0.7,0);
+			\end{scope}
+			\begin{scope}[shift={(2.8,0)}]
+			\draw[blueT, line width=1,fill](0,0.5)circle(0.05);
+			\draw[blueT, line width=1,fill](0.25,0.5)circle(0.05);
+			\draw[blueT, line width=1,fill](-0.25,0.5)circle(0.05);
+			\end{scope}
+			\begin{scope}[shift={(-2.8,0)}]
+			\draw[blueT, line width=1,fill](0,0.5)circle(0.05);
+			\draw[blueT, line width=1,fill](0.25,0.5)circle(0.05);
+			\draw[blueT, line width=1,fill](-0.25,0.5)circle(0.05);
+			\end{scope}
+			\end{scope}
+		\end{tikzpicture}
+	\end{minipage}\\[-0.5cm]
+
+	\begin{minipage}{0.33\textwidth}
+		\begin{tikzpicture}[>=latex', scale=0.9]
+			\draw[->][line width=0.75](0,-2)--(0,2)node[above]{$f_a = f \; mod(f_s)$};
+			\draw[->][line width=0.75](-2.5,0)--(2.5,0)node[below]{$f$};
+			\draw[darkgray, smooth,samples=100,domain=-2.5:2.5, line width=1 ,dashed] plot (\x,{(\x)}) node[right] {$f_{true}$};
+			\draw[CadetRed, line width=1 ] (-2.5,-0.5)--(-1,1)--(-1,-1)--(1,1)--(1,-1)--(2.5,0.5);
+			\def\i{2};
+			\draw[line width=0.75 ] (\i,0.1)--(\i,-0.1)node[below]{\footnotesize$f_s$};
+			\def\i{-2};
+			\draw[line width=0.75 ] (\i,0.1)--(\i,-0.1)node[below]{\footnotesize$-f_s$};
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}{0.67\textwidth}
+		\textbf{Rekonstruktion}\\[0.1cm]
+		Enthält das Signal Frequenzen ausserhalb des Nyquistbandes $\left[-\frac{f_s}{2} \,;\, \frac{f_s}{2}\right]$, so werden diese auf Frequenzen ins Nyquistband abgebildet $\rightarrow$ \textbf{Aliasing}.\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$f_a = f\;mod(f_s) = f - round\left(\dfrac{f}{f_s}\right)\cdot f_s$}\\[0.2cm]
+		Frequenzen mit gleichen Sampeln: $f\pm n\cdot f_s\quad n\in\mathbb{Z}$
+	\end{minipage}
+	
+\section{Digitale Frequenz}
+	\begin{minipage}{0.7\textwidth}
+		\textbf{Digitale Frequenz:}$\qquad$\fcolorbox{CadetRed}{white}{$\omega = \Omega\cdot T = 2\pi fT = \dfrac{2\pi f}{f_s}$}$\quad [rad/sample]$\\[0.3cm]
+		\hspace*{4.4cm}$x(t) = \e^{j2\pi fT}\qquad\Rightarrow\qquad x(nT)=\e^{j\omega n}$
+	\end{minipage}
+	\begin{minipage}{0.3\textwidth}
+		\begin{tikzpicture}[>=latex', scale=0.9]
+			\def\r{1.2};
+			\draw[ line width=0.5](\r,0)--(0,0)--({\r*cos(30)},{\r*sin(30)});
+			\draw[ line width=0.5,->](\r/3*2,0)arc(0:30:\r/3*2);
+			\draw[ line width=0.5](\r/2-0.1,0.125)--(\r/2-0.5,-0.125)node[below]{\footnotesize $\omega=\Omega\cdot T$};
+			\draw[CadetRed, line width=1 ](0,0)circle(\r);
+			\foreach \i in {30,60,...,360}
+			{
+				\draw[CadetRed, line width=1 ,fill]({\r*cos(\i)},{\r*sin(\i)})circle(\r/14);
+			}
+		\end{tikzpicture}
+	\end{minipage}\\[0.3cm]
+
+	\begin{tabular}{|l|ll|c|c|}
+	\hline&&&&\\[-0.35cm]
+		& \multicolumn{2}{l|}{\textbf{Zeichen / Einheit}} & \textbf{Nyquistintervall} & \textbf{Aliasing-Frequenzen} \\[0.05cm]
+	\hline&&&&\\[-0.35cm]
+		Natürliche Frequenz &$f$ &$[\Hz] = [cycles/s]$ & $-f_s/2 \dots f_s/2 $ & $f\pm n\cdot f_s$\\[0.05cm]
+	\hline&&&&\\[-0.35cm]
+		Kreisfrequenz & $\Omega = 2\pi f$ &$[rad/s]$ & $-\pi f_s \dots \pi f_s $ & $\Omega\pm n\cdot\Omega_s$\\[0.05cm]
+	\hline&&&&\\[-0.35cm]
+		Digitale Frequenz & $\omega = 2\pi f/f_s$ &$[rad/sample]$ & $-\pi \dots \pi $ & $\omega \pm 2\pi n $\\[0.05cm]
+	\hline&&&&\\[-0.35cm]
+		Normalisierte Frequenz & $f/f_s$ &$[cycles/sample]$& $-1/2\dots 1/2 $ & $f/f_s\pm n $\\[0.05cm]
+	\hline
+	\end{tabular}\\[0.3cm]
+
+\section{Spektrum von abgetasteten Signalen}
+	\textbf{Discrete Time Fourier Transform (DTFT)}\\[0.2cm]
+	\fcolorbox{CadetRed}{white}{$\hat x(t) = \mysum{n=-\infty}{\infty}{x(nT)\cdot \delta(t-nT)}\qquad\FT\qquad \hat X(f)=\mysum{n=-\infty}{\infty}{x(nT)\cdot \e^{-j2\pi fTn}} = \dfrac{1}{T}\mysum{m=-\infty}{\infty}{X(f-mf_s)}$}\\[0.3cm]
+	\hspace*{0.89cm}\begin{tikzpicture}[>=latex', scale=0.9]
+		\begin{scope}[shift={(0,0)}]
+		\draw[->][line width=0.75](2.5,-0.5)--(2.5,2)node[above]{$\hat x(t)$};
+		\draw[->][line width=0.75](0,0)--(5.3,0)node[below]{$t$};
+		\draw[black, line width=0.5 ](3,0.3)--(3,-0.3);
+		\draw[black, line width=0.5,<-> ](2.5,-0.2)--(3,-0.2)node at(2.8,-0.2)[below]{$T$};
+		\begin{scope}[shift={(0,0)}]
+		\draw[darkgray, smooth,samples=100,domain=0:5, line width=0.5,dashed ] plot (\x,{(\x+1-1.3*sin(2*\x*180/pi))/(\x+1)}) node[right] {$ $};
+		\draw[CadetRed, line width=1,-> ](0,0)--(0,1);
+		\draw[CadetRed, line width=1,-> ](0.5,0)--(0.5,0.27073);
+		\draw[CadetRed, line width=1,-> ](1,0)--(1,0.40896);
+		\draw[CadetRed, line width=1,-> ](1.5,0)--(1.5,0.92662);
+		\draw[CadetRed, line width=1,-> ](2,0)--(2,1.3279);
+		\draw[CadetRed, line width=1,-> ](2.5,0)--(2.5,1.3562);
+		\draw[CadetRed, line width=1,-> ](3,0)--(3,1.0908);
+		\draw[CadetRed, line width=1,-> ](3.5,0)--(3.5,0.8102);
+		\draw[CadetRed, line width=1,-> ](4,0)--(4,0.74277);
+		\draw[CadetRed, line width=1,-> ](4.5,0)--(4.5,0.90259);
+		\draw[CadetRed, line width=1,-> ](5,0)--(5,1.1179);
+		\end{scope}
+		\end{scope}
+
+% 			\draw[ line width=0.7](5.75,0.5)--(6.25,0.5);
+% 			\draw[ line width=1,fill](6.25,0.5)circle(0.1);
+% 			\draw[ line width=0.7, fill=white](5.75,0.5)circle(0.1);
+		\node at(6.2,1){$\FT$};
+
+		\begin{scope}[shift={(10,0)}]
+		\draw[->][line width=0.75](0,-0.5)--(0,2)node[above]{\small$T\cdot | \hat X(f)|$};
+		\draw[->][line width=0.75](-2.5,0)--(2.8,0)node[below]{$f$};
+		\begin{scope}[shift={(0,0)}]
+		\draw[blueT, line width=1](-0.6,0)--(-0.3,1)--node[above, fill=white]{\tiny $|X(f)|$}(0.3,1)--(0.6,0);
+		\draw[line width=0.75](0,0.2)--(0,-0.2)node[below]{$ $};
+		\draw[line width=0.75](1.6,0.2)--(1.6,-0.2)node[below]{\footnotesize$f_s$};
+		\draw[line width=0.75](-1.6,0.2)--(-1.6,-0.2)node[below]{\footnotesize$-f_s$};
+		\draw[line width=0.75](0.6,0.2)--(0.6,-0.2)node[below]{\footnotesize$ f_{max}$};
+		\draw[line width=0.75](-0.6,0.2)--(-0.6,-0.2)node[below]{\footnotesize$-f_{max}$};
+		\draw[line width=2, CadetRed](-0.8,0)--(0.8,-0);
+		\node[CadetRed, above=-3pt] at (0,-1.2){\footnotesize Nyquistintervall};
+
+		\end{scope}
+		\begin{scope}[shift={(1.6,0)}]
+		\draw[blueT, line width=1](-0.6,0)--(-0.3,1)--node[above]{\tiny $|X(f-f_s)|$}(0.3,1)--(0.6,0);
+		\end{scope}
+		\begin{scope}[shift={(-1.6,0)}]
+		\draw[blueT, line width=1](-0.6,0)--(-0.3,1)--node[above]{\tiny $|X(f+f_s)|$}(0.3,1)--(0.6,0);
+		\end{scope}
+		\begin{scope}[shift={(2.8,0)}]
+		\draw[blueT, line width=1,fill](0,0.5)circle(0.05);
+		\draw[blueT, line width=1,fill](0.25,0.5)circle(0.05);
+		\draw[blueT, line width=1,fill](-0.25,0.5)circle(0.05);
+		\end{scope}
+		\begin{scope}[shift={(-2.8,0)}]
+		\draw[blueT, line width=1,fill](0,0.5)circle(0.05);
+		\draw[blueT, line width=1,fill](0.25,0.5)circle(0.05);
+		\draw[blueT, line width=1,fill](-0.25,0.5)circle(0.05);
+		\end{scope}
+		\end{scope}
+	\end{tikzpicture} \\[0.2cm]
+	\hspace*{6.45cm}\fcolorbox{CadetRed}{white}{$T\cdot \hat X(f)= X(f)\qquad \text{für}\quad \dfrac{-f_s}{2}\leq f\leq \dfrac{f_s}{2}$}\\[-0.5cm]
+
+	\subsection{Eigenschaften:}
+	\begin{description}
+	 \item [DTFT:] Nicht zu verwechseln mit der Discrete Fourier Transform (DFT), die ein Spezialfall der DTFT ist.
+	 \item[Periodizität:] $\hat X(f)$ ist eine periodische Funktion mit der Periodendauer $f_s = 1/T$. Dies ist auch aus der $\e$-Funktion ersichtlich.
+	 \item[Fourierreihe:] Das Spektrum des abgetasteten Signals $\hat X(f)$ kann auch als Fourierreihe intepretiert werden. Dabei wären die Samples $x(nT)$ die Fourierkoeffizienten.\\[0.2cm]
+	 \fcolorbox{CadetRed}{white}{$x(nT) = \dfrac{1}{f_s}\myint{-f_s/2}{f_s/2}{\hat X(f)\cdot\e^{j2\pi fTn}}{f} = \dfrac{1}{2\pi}\myint{-\pi}{\pi}{\hat X(\omega)\cdot\e^{j\omega n}}{\omega}$}
+	 \item[Nummerische Approximation:] Das Spektrum des abgetasteten Signals $\hat X(f)$ kann auch als nummeriche Integralapproximation des Originalspektrums $X(f)$ betrachtet werden.\\[0.2cm]
+	 \fcolorbox{CadetRed}{white}{$X(f) = \myint{-\infty}{\infty}{x(t)\cdot\e^{-j2\pi ft}}{t} \approx \mysum{n=-\infty}{\infty}{x(nT)\cdot\e^{-j2\pi fTn}\cdot T} = T\cdot\hat X(f)$}
+	 \item[Praktische Approximation:] Für die Praxis müssen noch zwei weitere Approximation gemacht werden. Die Samples müssen auf eine endliche Anzahl $L$ beschränkt werden und die Anzahl Frequenzen ebenfalls (DFT, FFT).\\[0.2cm]
+	 \fcolorbox{CadetRed}{white}{$\hat X(f) \approx \hat X_L(f) = \mysum{n=0}{L-1}{x(nT)\cdot\e^{-j2\pi fTn}}$}
+	\end{description}
+
+
+\section{Prefilter und Postfilter}
+	\begin{tikzpicture}[>=latex', scale=1]
+		\def\s{0.8};
+		\begin{scope}[shift={(0,0)}]
+			\draw[black, line width=1 ](-\s,-\s)--(\s,-\s)--(\s,\s)--(-\s,\s)--(-\s,-\s);
+			\node at(0,0){\parbox {1.5cm}{\centering\footnotesize analog prefilter $H_{\text{pre}}(f)$}};
+			\draw[black, line width=1,-> ](-3*\s,0)--node[below]{\parbox {1cm}{\centering\footnotesize analog in}}node[above]{\footnotesize$x_a(t)$}(-\s,0);
+			\draw[black, line width=1,-> ](\s,0)--node[above]{\footnotesize$x(t)$}(2.2*\s,0);	
+			\begin{scope}[shift={(-1.25,-3.1)}]
+				\draw[->][line width=0.75](0,-0.2)--(0,1.4)node[above]{\footnotesize$|X_a(f)|$};
+				\draw[->][line width=0.75](-1.1,0)--(1.1,0)node[below]{\footnotesize$f$};
+				\draw[CadetRed, line width=1](-0.8,0)--(-0.3,1)--(0.3,1)--(0.8,0);
+				\draw[darkgray, line width=0.5,dashed](-0.6,0)--(-0.6,1.1)--(0.6,1.1)--(0.6,0);
+			\end{scope}		
+		\end{scope}
+		\begin{scope}[shift={(3.2*\s,0)}]
+			\draw[black, line width=1 ](-\s,-\s)--(\s,-\s)--(\s,\s)--(-\s,\s)--(-\s,-\s);
+			\node at(0,0){\parbox {1.5cm}{\centering\footnotesize sampler\\ \&\\ A/D}};
+			\draw[black, line width=1,-> ](\s,0)--node[above]{\footnotesize$\hat x(t)$}(2.2*\s,0);			
+			\begin{scope}[shift={(-1.25,-3.1)}]
+				\draw[->][line width=0.75](0,-0.2)--(0,1.4)node[above]{\footnotesize$|X(f)|$};
+				\draw[->][line width=0.75](-1.1,0)--(1.1,0)node[below]{\footnotesize$f$};
+				\draw[CadetRed, line width=1](-0.6,0)--(-0.6,0.4)--(-0.3,1)--(0.3,1)--(0.6,0.4)--(0.6,0);
+				\draw[darkgray, line width=0.5,dashed](-0.6,0)--(-0.6,1.1)--(0.6,1.1)--(0.6,0);
+			\end{scope}		
+		\end{scope}
+		\begin{scope}[shift={(6.4*\s,0)}]
+			\draw[black, line width=1 ](-\s,-\s)--(\s,-\s)--(\s,\s)--(-\s,\s)--(-\s,-\s);
+			\node at(0,0){\parbox {1.5cm}{\centering\footnotesize DSP $H_{\text{dsp}}(f)$}};
+			\draw[black, line width=1,-> ](\s,0)--node[above]{\footnotesize$\hat y(t)$}(2.2*\s,0);
+			\begin{scope}[shift={(-1.25,-3.1)}]
+				\draw[->][line width=0.75](0,-0.2)--(0,1.4)node[above]{\footnotesize$|\hat X(f)|$};
+				\draw[->][line width=0.75](-1.1,0)--(1.1,0)node[below]{\footnotesize$f$};
+				\draw[CadetRed, line width=1](-0.6,0)--(-0.6,0.4)--(-0.3,1)--(0.3,1)--(0.6,0.4)--(0.6,0);
+				\draw[CadetRed, line width=1](-0.6,0)--(-0.6,0.4)--(-0.9,1)--(-1.2,1);
+				\draw[CadetRed, line width=1](0.6,0)--(0.6,0.4)--(0.9,1)--(1.2,1);
+
+% 					\draw[darkgray, line width=0.5,dashed](-0.6,0)--(-0.6,1.1)--(0.6,1.1)--(0.6,0);
+			\end{scope}	
+		\end{scope}
+		\begin{scope}[shift={(9.6*\s,0)}]
+			\draw[black, line width=1 ](-\s,-\s)--(\s,-\s)--(\s,\s)--(-\s,\s)--(-\s,-\s);
+			\node at(0,0){\parbox {1.5cm}{\centering\footnotesize staircase D/A $H_{\text{dac}}(f)$}};
+			\draw[black, line width=1,-> ](\s,0)--node[above]{\footnotesize$y(t)$}(2.2*\s,0);
+			\begin{scope}[shift={(-1.25,-3.1)}]
+				\draw[->][line width=0.75](0,-0.2)--(0,1.4)node[above]{\footnotesize$|\hat Y(f)|$};
+				\draw[->][line width=0.75](-1.1,0)--(1.1,0)node[below]{\footnotesize$f$};
+				\draw[CadetRed, line width=1](-0.5,0)--(-0.3,0.8)--(0.3,0.8)--(0.5,0);
+				\draw[CadetRed, line width=1](-0.7,0)--(-0.9,0.8)--(-1.2,0.8);
+				\draw[CadetRed, line width=1](0.7,0)--(0.9,0.8)-.(1.2,0.8);
+
+% 					\draw[darkgray, line width=0.5,dashed](-0.6,0)--(-0.6,1.1)--(0.6,1.1)--(0.6,0);
+			\end{scope}	
+		\end{scope}
+		\begin{scope}[shift={(12.8*\s,0)}]
+			\draw[black, line width=1 ](-\s,-\s)--(\s,-\s)--(\s,\s)--(-\s,\s)--(-\s,-\s);
+			\node at(0,0){\parbox {1.5cm}{\centering\footnotesize analog postfilter $H_{\text{post}}(f)$}};
+			\draw[black, line width=1,-> ](\s,0)--node[below]{\parbox {1cm}{\centering\footnotesize analog out}}node[above]{\footnotesize$y_a(t)$}(3*\s,0);
+			\begin{scope}[shift={(-1.25,-3.1)}]
+				\draw[->][line width=0.75](0,-0.2)--(0,1.4)node[above]{\footnotesize$| Y(f)|$};
+				\draw[->][line width=0.75](-1.1,0)--(1.1,0)node[below]{\footnotesize$f$};
+				\draw[black, line width=0.5,dashed](-0.5,0)--(-0.3,0.8)--(0.3,0.8)--(0.5,0);
+				\draw[black, line width=0.5,dashed](-0.7,0)--(-0.9,0.8)--(-1.2,0.8);
+				\draw[black, line width=0.5,dashed](0.7,0)--(0.9,0.8)-.(1.2,0.8);
+				\draw[CadetRed, smooth,samples=100,domain=-0.32:0.32, line width=1] plot (\x,{0.308*(sin(\x*2.6*180/pi))/(\x)}) node[right] {$ $};
+				\draw[CadetRed, smooth,samples=100,domain=0.77:1.2, line width=1] plot (\x,{0.308*(sin(\x*2.6*180/pi))/(\x)}) node[right] {$ $};
+				\draw[CadetRed, smooth,samples=100,domain=-1.2:-0.77, line width=1] plot (\x,{0.308*(sin(\x*2.6*180/pi))/(\x)}) node[right] {$ $};
+				\draw[CadetRed, line width=1](-0.7,0)--(-0.78,0.35);
+				\draw[CadetRed, line width=1](0.7,0)--(0.78,0.35);
+				\draw[CadetRed, line width=1](0.5,0)--(0.315,0.72);
+				\draw[CadetRed, line width=1](-0.5,0)--(-0.315,0.72);
+% 					\draw[darkgray, line width=0.5,dashed](-0.6,0)--(-0.6,1.1)--(0.6,1.1)--(0.6,0)--(1.2,0)--(1.2,0.4);
+			\end{scope}	
+			\begin{scope}[shift={(-1.25+3.2*\s,-3.1)}]
+				\draw[->][line width=0.75](0,-0.2)--(0,1.4)node[above]{\footnotesize$|Y_a(f)|$};
+				\draw[->][line width=0.75](-1.1,0)--(1.1,0)node[below]{\footnotesize$f$};
+				\draw[CadetRed, line width=1](-0.5,0)--(-0.3,0.8)--(0.3,0.8)--(0.5,0);
+				\draw[black, line width=0.5,dashed](-0.7,0)--(-0.9,0.8)--(-1.2,0.8);
+				\draw[black, line width=0.5,dashed](0.7,0)--(0.9,0.8)-.(1.2,0.8);
+			\end{scope}	
+		\end{scope}
+	\end{tikzpicture}\\
+	
+	\begin{description}
+		\item [Antialiasing Prefilter:] Das Antialiasing Prefilter ist notwentig, um das Eingangssignal bandzubeschränken. Die Stoppfrequenz und die minimale Stopdämpfung ist so zu wählen, dass die Aliasingeffekte so gering wie nötig sind. Die erste spektrale Kopie sollte dabei komplett im Stoppband liegen.\\[0.2cm]
+		\begin{minipage}{0.3\textwidth}
+			\begin{tikzpicture}[>=latex', scale=1.2]
+				\def\fs{0.975};
+				\draw[->][line width=0.75](0,-0.2)--(0,1.7)node[above]{\footnotesize$|H_\text{pre}(f)|$};
+				\draw[->][line width=0.75](-2,0)--(2.1,0)node[right]{\footnotesize$f$};
+				\draw[CadetRed, line width=1, rounded corners=10](-2,0)--(-1.3,0)--(-0.7,1)--(0.7,1)--(1.3,0)--(2,0);
+
+				\draw[gray, line width=0.05,fill, opacity=0.5](-0.65,0)--(-0.65,0.93)--(0.65,0.93)--(0.65,0);
+				\draw[gray, line width=0.05, fill, opacity=0.5](-0.65,1.15)--(-0.65,1.01)--(0.65,1.01)--(0.65,1.15);
+				\draw[gray, line width=0.05, fill, opacity=0.5](-1.3,0.25)--(-1.3,0.1)--(-2,0.1)--(-2,0.25);
+				\draw[gray, line width=0.05, fill, opacity=0.5](1.3,0.25)--(1.3,0.1)--(2,0.1)--(2,0.25);
+
+				\draw[darkgray, line width=0.5,dashed](-\fs,0)--(-\fs,1.3)--(\fs,1.3)node[right]{\footnotesize ideal prefilter}--(\fs,0);
+
+				\draw[black, line width=0.5](\fs,0.1)--(\fs,-0.4)node[below]{\tiny $f_s/2$};
+				\draw[black, line width=0.5](-\fs,0.1)--(-\fs,-0.4)node[below]{\tiny $-f_s/2$};
+				\draw[black, line width=0.5](0.65,0.1)--(0.65,-0.1)node[below,, xshift=-3pt]{\tiny $f_{pass}$};
+				\draw[black, line width=0.5](-0.65,0.1)--(-0.65,-0.1)node[below, , xshift=3pt]{\tiny $-f_{pass}$};
+				\draw[black, line width=0.5](1.3,0.1)--(1.3,-0.1)node[below, , xshift=3pt]{\tiny $f_{stop}$};
+				\draw[black, line width=0.5](-1.3,0.1)--(-1.3,-0.1)node[below, xshift=-3pt]{\tiny $-f_{stop}$};
+			\end{tikzpicture}
+		\end{minipage}
+		\begin{minipage}{0.5\textwidth}
+			\fcolorbox{CadetRed}{white}{$f_{stop} = f_s-f_{pass}$}
+		\end{minipage}
+		
+		\item[Ideales Tiefpassfilter zur Rekonstruktion:]$ $ \\
+		Mit einem idealen Tiefpassfilter könnte das Originalspektrum wieder herausgefiltert werden. Die Übertragungsfunktion und Impulsantwort des Idealen Tiefpasses sind folgende:\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$H_{dac}(f) = \begin{cases}T, & |f|\leq f_s/2\\ 0,& \text{sonst}\end{cases}$}$\qquad$\fcolorbox{CadetRed}{white}{$h_{dac}(t) = \dfrac{\sin(\pi\,t/T)}{\pi\,t/T} = \dfrac{\sin(\pi\,f_s\,t)}{\pi\,f_s\,t}$}
+		
+		\item[Staircase Rekonstruktor:] Der Staircase Rekonstruktor ist der am weitesten verbreitete. Seine Übertragungsfunktion und Impulsantwort sind folgende:\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$H_{dac}(f) = T\,\dfrac{1}{j2\pi f}\cdot(1-\e^{-j2\pi fT}) = T\,\dfrac{\sin(\pi\,f\,T)}{\pi\,f\,T}\cdot\e^{-j\pi fT}$}$\qquad$\fcolorbox{CadetRed}{white}{$h_{dac}(t) = \begin{cases}1, & 0\leq t\leq T\\ 0,& \text{sonst}\end{cases}$}\\
+		
+		\begin{tikzpicture}[>=latex', scale=1]
+			\begin{scope}[shift={(0,0)}]
+			\draw[->][line width=0.75](2.5,-0.5)--(2.5,1.8)node[above]{$h_{\text{dac}}(t)$};
+			\draw[->][line width=0.75](0,0)--(5.3,0)node[below]{$t$};
+			\begin{scope}[shift={(0,0)}]
+			\draw[blueT, line width=1.25](2.5,1.39)--(3.135,1.39)--(3.135,0);
+			\draw[CadetRed, smooth,samples=100,domain=-0:5, line width=1.25] plot (\x,{0.28*(sin((\x-2.5)*4.95*180/pi))/(\x-2.5)}) node[right] {$ $};
+			\draw[line width=0.5](3.135,0.2)--(3.135,-0.2)node[below]{\footnotesize$T$};
+			\draw[line width=0.5](1.865,0.2)--(1.865,-0.2)node[below]{\footnotesize$-T$};
+			\draw[line width=0.5](2.7,1.39)--(2.3,1.39)node[left]{\footnotesize$1$};
+			\node at (2.7,-1.1) {\parbox{4cm}{\textcolor{CadetRed}{ideal TP}$\qquad$\textcolor{blueT}{staircase}}};
+
+			\end{scope}
+			\end{scope}
+
+	% 			\draw[ line width=0.7](5.75,0.5)--(6.25,0.5);
+	% 			\draw[ line width=1,fill](6.25,0.5)circle(0.1);
+	% 			\draw[ line width=0.7, fill=white](5.75,0.5)circle(0.1);
+			\node at(6.2,1){$\FT$};
+
+			\begin{scope}[shift={(10,0)}]
+			\node at (0.2,-1.1) {\parbox{4cm}{\textcolor{CadetRed}{ideal TP}$\qquad$\textcolor{blueT}{staircase}}};
+			\draw[->][line width=0.75](0,-0.5)--(0,1.8)node[above]{\small$ |H_{\text{dac}}(f)|$};
+			\draw[->][line width=0.75](-2.5,0)--(2.8,0)node[below]{$f$};
+			\begin{scope}[shift={(0,0)}]
+			\draw[gray, dashed, line width=1](-0.6,0)--(-0.3,1)--(0.3,1)--(0.6,0);
+			\draw[line width=0.75](0,0.2)--(0,-0.2)node[below]{$ $};
+			\draw[line width=0.75](1.6,0.2)--(1.6,-0.2)node[below]{\footnotesize$f_s$};
+			\draw[line width=0.75](-1.6,0.2)--(-1.6,-0.2)node[below]{\footnotesize$-f_s$};
+			\draw[line width=1.25,CadetRed](0.8,0)--(0.8,1.2)--(-0.8,1.2)--(-0.8,0);
+			\end{scope}
+			\begin{scope}[shift={(1.6,0)}]
+			\draw[gray, dashed, line width=1](-0.6,0)--(-0.3,1)--(0.3,1)--(0.6,0);
+			\end{scope}
+			\begin{scope}[shift={(-1.6,0)}]
+			\draw[gray, dashed, line width=1](-0.6,0)--(-0.3,1)--(0.3,1)--(0.6,0);
+			\end{scope}
+			\begin{scope}[shift={(2.8,0)}]
+			\draw[gray, line width=1,fill](0,0.5)circle(0.05);
+			\draw[gray, line width=1,fill](0.25,0.5)circle(0.05);
+			\draw[gray, line width=1,fill](-0.25,0.5)circle(0.05);
+			\end{scope}
+			\begin{scope}[shift={(-2.8,0)}]
+			\draw[gray, line width=1,fill](0,0.5)circle(0.05);
+			\draw[gray, line width=1,fill](0.25,0.5)circle(0.05);
+			\draw[gray, line width=1,fill](-0.25,0.5)circle(0.05);
+			\end{scope}
+			\draw[line width=0.5](0.2,1.2)--(-0.2,1.2)node[above,xshift=-2pt]{\footnotesize$T$};
+
+			\draw[blueT, smooth,samples=100,domain=-1.6:1.6, line width=1.25] plot (\x,{0.615*(sin(\x*1.95*180/pi))/(\x)}) node[right] {$ $};
+			\draw[blueT, smooth,samples=100,domain=1.6:2.7, line width=1.25] plot (\x,{-0.615*(sin(\x*1.95*180/pi))/(\x)}) node[right] {$ $};
+			\draw[blueT, smooth,samples=100,domain=-2.7:-1.6, line width=1.25] plot (\x,{-0.615*(sin(\x*1.95*180/pi))/(\x)}) node[right] {$ $};
+
+			\end{scope}
+		\end{tikzpicture} 
+		
+		\item[Digital Equalizer:] Um die vom Staircase Rekonstruktor verursachte Abschwächung im Basisband zu kompensieren, wird vor der D/A-Wandlung das Spektrum vorverzerrt. Dabei handelt es sich um ein digitales und daher periodisches Filter. Das Filter entspricht gerade der Inversen des Staircase Rekonstruktor im Basisband.\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$H_{eq}(f) = \dfrac{T}{H_{dac}(f)} = \dfrac{\pi\,f\,T}{\sin(\pi\,f\,T)}\cdot\e^{j\pi fT}$}$\qquad$ für $\quad -\dfrac{f_s}{2}\leq f \leq \dfrac{f_s}{2}$
+		
+		\item[Analog Postfilter:] Das Analog Postfilter ist ein Tiefpass, der die höheren Spektralen Perioden unterdrückt.
+		
+	\end{description}
+	
+
+		
+		

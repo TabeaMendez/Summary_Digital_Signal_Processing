@@ -1,0 +1,391 @@
+% 
+% (c) Copyright 2016 Tabea Mendez
+% 
+% This source is free: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This source is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this source.  If not, see <http://www.gnu.org/licenses/>.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\begin{minipage}{0.6\textwidth}
+		Ein Discrete-Time-System ist ein System, welches eine Eingangssequenz in eine Ausgangssequenz transformiert.\\
+		Die Transformation kann dabei auf zwei Arten erfolgen:
+		\begin{itemize}
+		 \item Sample für Sample
+		 \item Blockweise
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}{0.4\textwidth}
+		\begin{tikzpicture}[>=latex', scale=1.5]
+			\draw[line width=1](-0.75,-0.5)--(0.75,-0.5)--(0.75,0.5)--node[above]{\footnotesize Discrete-Time-System}(-0.75,0.5)--cycle;
+			\draw[line width=1,->](-1.8,0)--node[above]{\footnotesize$x(n)$}node[below]{\footnotesize\parbox{2cm}{\centering input Sequenz}}(-0.75,0);
+			\draw[line width=1,<-](1.8,0)--node[above]{\footnotesize$y(n)$}node[below]{\footnotesize\parbox{2cm}{\centering output Sequenz}}(0.75,0);
+			\node at (0,0){\huge$H$};
+		\end{tikzpicture} 
+	\end{minipage}\\
+
+	\begin{minipage}{0.45\textwidth}
+		\textbf{Sample für Sample}\\[0.2cm]
+		$\begin{array}{c}
+		\{x_0,x_1,x_2,...,x_n,...\}\\ \downarrow H\\
+		\{y_0,y_1,y_2,...,y_n,...\}
+		\end{array}$\\[0.2cm]
+		\textbf{Bsp:}\\[0.1cm]
+		$y(n) = 2\,x(n) + 3\,x(n-1) + 4\, x(n-2)$
+	\end{minipage}
+	\begin{minipage}{0.25\textwidth}
+		\textbf{Blockweise}\\[0.2cm]
+		$\begin{bmatrix}x_0\\x_1\\\vdots\\x_n\\\vdots\end{bmatrix}\xrightarrow H \begin{bmatrix}y_0\\y_1\\\vdots\\y_n\\\vdots\end{bmatrix}$\\[0.2cm]
+	\end{minipage}
+	\begin{minipage}{0.25\textwidth}
+		\textbf{Bsp:}$\quad\vec y = H\cdot \vec x$\\[0.2cm]
+		$\begin{bmatrix}y_0\\y_1\\y_2\\y_3\\y_4\end{bmatrix} =\begin{bmatrix}2 & 0 & 0\\3 & 2 & 0\\4 & 3 & 2\\0 & 4 & 3 \\0 & 0 & 4\end{bmatrix}\cdot \begin{bmatrix}x_0\\x_1\\x_2\end{bmatrix}$
+	\end{minipage}
+	
+\section{Linearität und Zeitinvarianz}
+	\textbf{Linearität:}\\[0.2cm]
+		Für ein lineares System muss die Superpositionsbedingung erfüllt sein:\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$y(n) = a_1\,H[x_1(n)]+ a_2\,H[x_2(n)]= H[a_1\,x_1(n) + a_2\,x_2(n)] $}\\[0.2cm]
+	\begin{tikzpicture}[>=latex', scale=1.4]
+		\def\s{0.3};
+		\def\l{1};
+		\def\r{0.15};
+		\def\dis{0.8};
+
+		\coordinate (h1) at (0,\dis);
+		\draw[line width=1](h1)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h1){$H$};
+		\draw[line width=1,->](h1)++(-\l-\s,0)--node[above]{\footnotesize$x_1(n)$}++(\l,0);
+		\draw[line width=1,->](h1)++(\s,0)--node[above]{\footnotesize$y_1(n)$}++(\l,0);
+		\draw[line width=1](h1)++(\s+\l,0)node[right]{$a_1$}--++(0,\s)--++(2*\s,-\s)--++(-2*\s,-\s)--cycle;
+		\draw[line width=1,->](h1)++(3*\s+\l,0)--++(\l/2,0)--++(0,-\dis+\r);
+
+		\draw[line width=1,->](h1)++(3*\s+3/2*\l,-\dis)circle(\r)node{$+$};
+		\draw[line width=1,->](h1)++(3*\s+3/2*\l+\r,-\dis)--node[above]{$y(n)$}++(\l,0);
+
+		\coordinate (h2) at (0,-\dis);
+		\draw[line width=1](h2)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h2){$H$};
+		\draw[line width=1,->](h2)++(-\l-\s,0)--node[above]{\footnotesize$x_2(n)$}++(\l,0);
+		\draw[line width=1,->](h2)++(\s,0)--node[above]{\footnotesize$y_2(n)$}++(\l,0);
+		\draw[line width=1](h2)++(\s+\l,0)node[right]{$a_2$}--++(0,\s)--++(2*\s,-\s)--++(-2*\s,-\s)--cycle;
+		\draw[line width=1,->](h2)++(3*\s+\l,0)--++(\l/2,0)--++(0,\dis-\r);
+	\end{tikzpicture}$\qquad\qquad$
+	\begin{tikzpicture}[>=latex', scale=1.4]
+		\def\s{0.3};
+		\def\l{1};
+		\def\r{0.15};
+		\def\dis{0.8};
+
+		\coordinate (h1) at (0,\dis);
+		\draw[line width=1,->](h1)++(-\l-\s,0)--node[above]{\footnotesize$x_1(n)$}++(\l,0);
+		\draw[line width=1](h1)++(-\s,0)node[right]{$a_1$}--++(0,\s)--++(2*\s,-\s)--++(-2*\s,-\s)--cycle;
+		\draw[line width=1,->](h1)++(\s,0)--++(\l/2,0)--++(0,-\dis+\r);
+
+		\draw[line width=1,->](h1)++(\s+1/2*\l,-\dis)circle(\r)node{$+$};
+		\draw[line width=1,->](h1)++(\s+1/2*\l+\r,-\dis)--node[above]{$x(n)$}++(\l,0);
+
+		\coordinate (h3) at (3/2*\l+\r+2*\s,0);
+		\draw[line width=1](h3)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h3){$H$};
+		\draw[line width=1,->](h3)++(\s,0)--node[above]{\footnotesize$y(n)$}++(\l,0);
+
+		\coordinate (h2) at (0,-\dis);
+		\draw[line width=1,->](h2)++(-\l-\s,0)--node[above]{\footnotesize$x_2(n)$}++(\l,0);
+		\draw[line width=1](h2)++(-\s,0)node[right]{$a_2$}--++(0,\s)--++(2*\s,-\s)--++(-2*\s,-\s)--cycle;
+		\draw[line width=1,->](h2)++(\s,0)--++(\l/2,0)--++(0,\dis-\r);
+	\end{tikzpicture}
+	
+	\textbf{Zeitinvarianz:}\\[0.2cm]
+	Ein Zeitinvariantes System ändert seine Eigenschaften über die Zeit nicht.$\qquad$
+	\fcolorbox{CadetRed}{white}{$y_D(n) = y(n-D)$}\\[0.2cm]
+	\begin{tikzpicture}[>=latex', scale=1.4]
+		\def\s{0.3};
+		\def\l{1};
+		\def\d{1};
+
+		\coordinate (h3) at (0,0);
+		\draw[line width=1,->](h3)++(-\l-\s,0)--node[above]{\footnotesize$x(n)$}++(\l,0);
+		\draw[line width=1](h3)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h3){$H$};
+		\draw[line width=1,->](h3)++(\s,0)--node[above]{\footnotesize$y(n)$}++(\l,0);
+		\draw[line width=1](h3)++(\s+\l,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(2*\s+\l,0){$D$};
+		\draw[line width=1,->](h3)++(3*\s+\l,0)--node[above]{\footnotesize$y(n-D)$}++(\l,0);
+
+		\coordinate (h4) at (0,-\d);
+		\draw[line width=1,->](h4)++(-\l-\s,0)--node[above]{\footnotesize$x(n)$}++(\l,0);
+		\draw[line width=1](h4)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h4){$D$};
+		\draw[line width=1,->](h4)++(\s,0)--node[above]{\footnotesize$x(n-D)$}node[below]{\footnotesize$x_D(n)$}++(\l,0);
+		\draw[line width=1](h4)++(\s+\l,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(2*\s+\l,-\d){$H$};
+		\draw[line width=1,->](h4)++(3*\s+\l,0)--node[above]{\footnotesize$y_D(n)$}++(\l,0);
+	\end{tikzpicture}$\qquad\qquad$ 
+	\begin{tikzpicture}[>=latex', scale=1.4]
+		\def\s{0.4};
+		\def\l{1};
+		\def\d{0.4};
+
+		\coordinate (h3) at (0,0);
+		\draw[line width=1,->](h3)++(-\l-\s,0)--node[above]{$x(n)$}++(\l,0);
+
+		\draw[line width=1](h3)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h3){\parbox{2cm}{\centering  {\footnotesize Delay}\\ $D$}};
+		\draw[line width=1,->](h3)++(\s,0)--node[above, xshift=6pt]{$x(n-D)$}++(\l,0);
+
+		\coordinate (f1) at (-3,-\s);
+		\draw[line width=0.5,->](f1)++(-0.1,0)--++(1.5*\l+0.2,0)node[right]{\footnotesize$n$};
+		\draw[line width=0.5,->](f1)++(0,-0.1)node[below]{\tiny$0$}--++(0,\l)node[right]{\footnotesize$x(n)$};
+		\foreach \i in {1,...,6}
+		\draw[line width=0.5,fill](f1)++({(\i-1)/4},0)--++(0,{0.3*cos(\i*0.55*180/pi)+0.4})circle(0.03);
+
+		\coordinate (f2) at (2.1,-\s);
+		\draw[line width=0.5,->](f2)++(-0.1,0)--++(1.5*\l+\d+0.2,0)node[right]{\footnotesize$n$};
+		\draw[line width=0.5,->](f2)++(0,-0.1)node[below]{\tiny$0$}--++(0,\l)node[right]{\footnotesize$x(n-D)$};
+		\draw[line width=0.5,<->](f2)++(0,0.3)--node[above]{\tiny$D$}++(\d,0);
+
+		\foreach \i in {1,...,6}
+		\draw[line width=0.5,fill](f2)++({(\i-1)/4+\d},0)--++(0,{0.3*cos(\i*0.55*180/pi)+0.4})circle(0.03);
+	\end{tikzpicture}\\[-0.3cm]
+
+\section{Impulsantwort}
+\vspace*{-0.6cm}\begin{minipage}{0.35\textwidth}
+	Ein lineares, zeitinvariantes System, ist durch seine Impulsantwort vollständig bestimmt. Wird am Eingang ein Impuls $\delta(n)$ angelet, so antwortet das System mit der Impulsantwort $h(n)$.
+\end{minipage}\begin{minipage}{0.05\textwidth}$ $\end{minipage}
+	\begin{minipage}{0.65\textwidth}
+			\begin{tikzpicture}[>=latex', scale=1.4]
+			\def\s{0.4};
+			\def\l{1};
+			\def\d{0};
+
+			\coordinate (h3) at (0,0);
+			\draw[line width=1,->](h3)++(-\l-\s,0)--node[above]{$\delta(n)$}++(\l,0);
+
+			\draw[line width=1](h3)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h3){$H$};
+			\draw[line width=1,->](h3)++(\s,0)--node[above]{$h(n)$}++(\l,0);
+
+			\coordinate (f1) at (-2.3,-\s);
+			\draw[line width=0.5,->](f1)++(-0.5,0)--++(1,0)node[right]{\footnotesize$n$};
+			\draw[line width=0.5,->](f1)++(0,-0.1)node[below]{\tiny$0$}--++(0,\l)node[right]{\footnotesize$\delta(n)$};
+			\foreach \i in {1}
+			\draw[line width=1,fill](f1)++({(\i-1)/4},0)--++(0,{0.25*cos(\i*0.55*180/pi)+0.4})circle(0.04);
+
+			\coordinate (f2) at (2.1,-\s);
+			\draw[line width=0.5,->](f2)++(-0.5,0)--++(1.5*\l+\d+0.6,0)node[right]{\footnotesize$n$};
+			\draw[line width=0.5,->](f2)++(0,-0.1)node[below]{\tiny$0$}--++(0,\l)node[right]{\footnotesize$h(n)$};
+	% 		\draw[line width=0.5,<->](f2)++(0,0.3)--node[above]{\tiny$D$}++(\d,0);
+
+			\foreach \i in {1,...,6}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)--++(0,{0.3*cos(\i*0.55*180/pi)+0.4})circle(0.04);
+			}
+		\end{tikzpicture} 
+
+		\begin{tikzpicture}[>=latex', scale=1.4]
+			\def\s{0.4};
+			\def\l{1};
+			\def\d{0.6};
+
+			\coordinate (h3) at (0,0);
+			\draw[line width=1,->](h3)++(-\l-\s,0)--node[above,, xshift=-5pt]{$\delta(n-k)$}++(\l,0);
+
+			\draw[line width=1](h3)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h3){$H$};
+			\draw[line width=1,->](h3)++(\s,0)--node[above, xshift=5pt]{$h(n-k)$}++(\l,0);
+
+			\coordinate (f1) at (-2.3,-\s);
+			\draw[line width=0.5,->](f1)++(-0.5,0)--++(1,0)node[right]{\footnotesize$n$};
+			\draw[line width=0.5,->](f1)++(-0.4,-0.1)node[below]{\tiny$0$}--++(0,\l)node[right]{\footnotesize$\delta(n-k)$};
+			\foreach \i in {1}
+			{
+			\draw[line width=1,fill](f1)++({(\i-1)/4+0.2},0)node[below]{$k$}--++(0,{0.25*cos(\i*0.55*180/pi)+0.4})circle(0.04);
+			}
+			\coordinate (f2) at (2.1,-\s);
+			\draw[line width=0.5,->](f2)++(-0.5,0)--++(1.5*\l+\d+0.6,0)node[right]{\footnotesize$n$};
+			\draw[line width=0.5,->](f2)++(0,-0.1)node[below]{\tiny$0$}--++(0,\l)node[right]{\footnotesize$h(n-k)$};
+	% 		\draw[line width=0.5,<->](f2)++(0,0.3)--node[above]{\tiny$D$}++(\d,0);
+
+			\foreach \i in {1}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)node[below]{$k$}--++(0,{0.3*cos(\i*0.55*180/pi)+0.4})circle(0.04);
+			}
+			\foreach \i in {2,...,6}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)node[below]{$ $}--++(0,{0.3*cos(\i*0.55*180/pi)+0.4})circle(0.04);
+			}
+		\end{tikzpicture}
+	\end{minipage}\\[-0.2cm]
+	\begin{description}
+		\item [LTI-Form:] $ $\\
+		\begin{minipage}[t]{0.65\textwidth}
+		Eingangssequenz ist Folge von gewichteten und verzögerten Diracs.\\
+		Ausgangssequenz ist Überlagerung der gewichteten und verzögerten Impulsantworten.
+		\end{minipage}\begin{minipage}[t]{0.03\textwidth}$ $\end{minipage}
+		\begin{minipage}[t]{0.28\textwidth}
+		$ $\\[-0.35cm]\fcolorbox{CadetRed}{white}{$y(n) = \mysum{m}{}{x(m)\cdot h(n-m)}$}\\
+		\end{minipage}
+		\item [Direkt Form:]$ $\\
+		\begin{minipage}{\textwidth}
+		Faltung der Eingangssequenz mit der Impulsantwort$\qquad\qquad\qquad\qquad\quad\;\,$
+		\fcolorbox{CadetRed}{white}{$y(n) = \mysum{m}{}{h(m)\cdot x(n-m)}$}
+		\end{minipage}
+	\end{description}
+
+\section{FIR und IIR Filter}
+	Diskrete LTI-Systeme werden über ihre Impulsantwort klassifiziert\\[0.2cm]
+	\begin{minipage}{0.45\textwidth}
+		\begin{itemize}
+		\item \textbf{FIR Filter:} Finite Impulse Response\\[-0.2cm]
+		\item \textbf{IIR Filter:} Infinite Impulse Response\\[0.4cm]
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}{0.5\textwidth}
+		\begin{tikzpicture}[>=latex', scale=1.6]
+			\def\s{0.4};
+			\def\l{1};
+			\def\d{0};
+
+			\coordinate (f2) at (0,0);
+			\draw[line width=0.5,->](f2)++(-0.4,0)--++(2.1*\l+\d+0.6,0)node[right]{\footnotesize$n$};
+			\draw[line width=0.5,->](f2)++(0,-0.1)node[below]{\footnotesize$0$}--++(0,\l)node[right]{\footnotesize FIR $h(n)$};
+	% 		\draw[line width=0.5,<->](f2)++(0,0.3)--node[above]{\tiny$D$}++(\d,0);
+
+			\foreach \i in {1,...,5}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)--++(0,{0.3*cos(\i*0.55*180/pi)+0.4})circle(0.04);
+			}
+			\foreach \i in {6}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)node[below]{\footnotesize$M$}--++(0,{0.3*cos(\i*0.55*180/pi)+0.4})circle(0.04);
+			}
+			\foreach \i in {0,7,8,9}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)--++(0,{0})circle(0.04);
+			}
+
+			\coordinate (f2) at (3.5,0);
+			\draw[line width=0.5,->](f2)++(-0.4,0)--++(2.1*\l+\d+0.6,0)node[right]{\footnotesize$n$};
+			\draw[line width=0.5,->](f2)++(0,-0.1)node[below]{\footnotesize$0$}--++(0,\l)node[right]{\footnotesize IIR $h(n)$};
+	% 		\draw[line width=0.5,<->](f2)++(0,0.3)--node[above]{\tiny$D$}++(\d,0);
+
+			\foreach \i in {1,...,6}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)--++(0,{0.3*cos(\i*0.55*180/pi)+0.4})circle(0.04);
+			}
+			\foreach \i in {0}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)--++(0,{0})circle(0.04);
+			}
+			\foreach \i in {8,9,10}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4.65+\d},0)++(0,{0.1})circle(0.015);
+			}
+		\end{tikzpicture} 
+	\end{minipage}\\[-0.6cm]
+	
+	\begin{description}
+	 \item [FIR Filter:]$ $\\[0.1cm]
+		Ein FIR Filter hat eine endliche Anzahl Koeffizienten, die nicht Null sind.\\[0.1cm]
+		\begin{tabular}{ll}
+		 Filterkoeffizienten & \fcolorbox{CadetRed}{white}{$\{h_0,h_1,h_2,...,h_M,0,0,0,...\}$}\\[0.2cm]
+		 Ordung: & \fcolorbox{CadetRed}{white}{$M$}\\[0.1cm]
+		 Filterlänge: & \fcolorbox{CadetRed}{white}{$L_h = M + 1$}\\
+		\end{tabular}\\[0.2cm]
+		Für FIR Filter vereinfacht sich die Direkte Faltungsform zu:\\[0.1cm]
+		$y(n) = h_0\, x(n) + h_1\, x(n-1) + h_2\, x(n-2) + ...  + h_M\, x(n-M)$\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$y(n) = \mysum{m=0}{M}{h(m)\cdot x(n-m)}$}\\[0.1cm]
+	 \item [IIR Filter:]$ $\\[0.1cm]
+		Ein IIR Filter hat eine unendliche Anzahl Koeffizienten, die nicht Null sind. Da solche Filter nicht realisiert werden können, wird er Fokus auf eine wichtige Unterklasse der IIR Filter gelegt:\\ \textbf{IIR Filter die den Ausgang zurückführen (Feedback-Loop) }\\[0.1cm]
+		Die Impulsantwort solcher IIR Filter kann in folgender Form geschrieben werden:\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$h(n) = \underbrace{\mysum{i=1}{M}{a_i\,h(n-i)}}_{\text{IIR-Teil}}+ \underbrace{\mysum{j=0}{L}{b_j\,\delta(n-j)}}_{\text{FIR-Teil}}$}\\[0.2cm]
+		und die Ein-Ausgangsgleichung folgendermassen:\\[0.1cm]
+		$y(n) = \underbrace{a_1\,y(n-1) + a_2\,y(n-2) + ... + a_M\,y(n-M)}_{\text{IIR-Teil}} + \underbrace{b_0\, x(n) + b_1\, x(n-1) + b_2\, x(n-2) + ...  + b_L\, x(n-L)}_{\text{FIR-Teil}}$\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$y(n) = \underbrace{\mysum{i=1}{M}{a_i\,y(n-i)}}_{\text{IIR-Teil}}+ \underbrace{\mysum{j=0}{L}{b_j\,x(n-j)}}_{\text{FIR-Teil}}$}\\[0.2cm]
+	\end{description}
+		
+\section{Kausalität und Stabilität}
+	\textbf{Kausalität}\\[0.2cm]
+	Es gibt drei Arten von Signalen und demzufolge auch drei Arten von LTI-Systemen.\\[-0.65cm]
+	\begin{itemize}
+	 \item Kausale Signale / LTI-Systeme\\[-0.65cm]
+	 \item Antikausale Signale / LTI-Systeme\\[-0.65cm]
+	 \item Gemischte Signale / LTI-Systeme
+	\end{itemize}
+
+	\begin{tabularx}{\textwidth}{|X|X|X|}
+	 \hline&&\\[-0.4cm]
+		\textbf{Kausal} & \textbf{Antikausal} & \textbf{Gemischt}\\
+	 \hline
+		\begin{tikzpicture}[>=latex', scale=1.4]
+			\def\s{0.4};
+			\def\l{1};
+			\def\d{0};
+
+			\coordinate (f2) at (0,0);
+			\draw[line width=0.5,->](f2)++(-1.5,0)--++(3.1,0)node[right]{\footnotesize$n$};
+			\draw[line width=0.5,->](f2)++(0,-0.1)node[below]{\footnotesize$0$}--++(0,\l+0.1)node[right]{\footnotesize $x(n)$};
+			\foreach \i in {1,...,6}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)--++(0,{0.3*cos(\i*0.55*180/pi)+0.4})circle(0.04);
+			}
+			\foreach \i in {-4,...,0}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)--++(0,{0})circle(0.04);
+			}
+		\end{tikzpicture}&		
+		\begin{tikzpicture}[>=latex', scale=1.4]
+			\def\s{0.4};
+			\def\l{1};
+			\def\d{0};
+			
+			\coordinate (f2) at (4,0);
+			\draw[line width=0.5,->](f2)++(-1.5,0)--++(3.1,0)node[right]{\footnotesize$n$};
+			\draw[line width=0.5,->](f2)++(0,-0.1)node[below]{\footnotesize$0$}--++(0,\l+0.1)node[right]{\footnotesize $x(n)$};
+
+			\foreach \i in {-4,...,0}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)--++(0,{0.3*cos(\i*0.55*180/pi)+0.4})circle(0.04);
+			}
+			\foreach \i in {1,...,6}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)--++(0,{0})circle(0.04);
+			}
+
+		\end{tikzpicture}&		
+		\begin{tikzpicture}[>=latex', scale=1.4]
+			\def\s{0.4};
+			\def\l{1};
+			\def\d{0};
+
+			\coordinate (f2) at (8,0);
+			\draw[line width=0.5,->](f2)++(-1.5,0)--++(3.1,0)node[right]{\footnotesize$n$};
+			\draw[line width=0.5,->](f2)++(0,-0.1)node[below]{\footnotesize$0$}--++(0,\l+0.1)node[right]{\footnotesize $x(n)$};
+
+			\foreach \i in {-4,...,6}
+			{
+				\draw[line width=1,fill](f2)++({(\i-1)/4+\d},0)--++(0,{0.3*cos(\i*0.55*180/pi)+0.4})circle(0.04);
+			}
+		\end{tikzpicture}\\
+	 \hline&&\\[-0.35cm]
+		ungleich Null für $n>=0$ & ungleich Null für $n<=-1$  & ungleich Null alle $n$\\[0.05cm]
+	 \hline
+	\end{tabularx}
+	
+	\textbf{Stabilität:}\\[0.2cm]
+	Ein LTI-System ist stabil, wenn ein begrenzter Eingang nur einen begrenzten Ausgang generiert.\\[0.2cm]
+	\fcolorbox{CadetRed}{white}{$\mysum{n=-\infty}{\infty}{|h(n)|}<\infty$}\\
+	
+	\textbf{Stabilität und Kausalität:}
+	\begin{itemize}
+	 \item Stabilität und Kausalität sind unabhänging voneinander
+	 \item Stabilität ist zwingend Kausalität nicht
+	 \item Um ein stabiles, antikausales oder gemischtes LTI-System zu realisieren, wird der Ausgang und die Anzahl Samples verzögert, die in der Zukunft liegen würden.\\
+	 Geht die Impulsantwort bis ins unendliche in die Zukunft, so wird diese einfach abgeschnitten, wenn die Koeffizienten genug klein geworden sind $\rightarrow$ Approximation
+	\end{itemize}
+
+	
+
+	
+
+

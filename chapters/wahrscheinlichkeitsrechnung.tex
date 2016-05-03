@@ -1,0 +1,993 @@
+% 
+% (c) Copyright 2016 Tabea Mendez
+% 
+% This source is free: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This source is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this source.  If not, see <http://www.gnu.org/licenses/>.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Wahrscheinlichkeitsrechnung \small{\textcolor{black}{S.128}}}
+	\section{Zufallsexperiment}
+		\vspace*{-0.8cm}\begin{minipage}{0.4\textwidth}
+			Ein Zufallsexperiment ist ein wiederholbares Experiment mit einem zufälligen Ergebnis.
+		\end{minipage}
+		\begin{minipage}{0.05\textwidth}$ $\end{minipage}
+		\begin{minipage}{0.55\textwidth}
+			\begin{tabular}{|c|}
+			\hline\\[-0.4cm]
+				Wiederholbares Experiment\\
+				$\downarrow$\\
+				Versuchsausgang (zufälliges Ergebnis)\\
+				$\downarrow$\\
+				Ereignis ist eingetreten ($\lambda \in A$) oder nicht ($\lambda\in S$)\\[0.2cm]
+			\hline
+			\end{tabular}
+		\end{minipage}\\[-0.6cm]
+	
+		\textbf{Begriffsdefinitionen:}\\[0.2cm]
+\renewcommand{\arraystretch}{1.2}
+		\begin{tabular}{|l|l|l|l|}
+		\hline
+			Begriff & Modell & Bemerkungen & Beispiel Würfel\\
+		\hline
+		\hline
+			Elementarereignis & $\lambda$ & einzelne Versuchsresultate & $\lambda = \{5\}$\\
+			Ergebnisraum &$S$ & alle möglichen Versuchsausgänge & $ S=\{1,2,3,4,5,6\}$\\
+			Ereignis & $A \subset S$ & bestimmte Gruppe von Versuchsausgängen & gerade Zahl: $ A=\{2,4,6\}$\\
+			sicheres Ereignis & $  S$ & tritt immer ein & $ S=\{1,2,3,4,5,6\}$\\
+			unmögliches Ereignis & $\emptyset$ & tritt nie ein &$\emptyset =\{\;\}$\\
+		\hline
+		\end{tabular}
+\renewcommand{\arraystretch}{1}
+
+	\section{Laplace Experiment}
+		\begin{minipage}{0.53\textwidth}
+			Ein Experiment mit endlich vielen Elementarereignissen, welche alle die gleiche Wahrscheinlichkeit haben.
+		\end{minipage}
+		\begin{minipage}{0.01\textwidth}$ $\end{minipage}
+		\begin{minipage}{0.5\textwidth}
+			\fcolorbox{CadetRed}{white}{$S=\{\lambda_1,\lambda_2,\lambda_3,...,\lambda_n\}\qquad$ mit $\qquad P(\lambda_i) = \frac{1}{n}$}
+		\end{minipage}
+
+	\section{Verknüpfung von Ereignissen}
+		\begin{tabularx}{0.9885\textwidth}{|m{0.19\textwidth}|m{0.1\textwidth}|m{0.13\textwidth}||m{0.19\textwidth}|m{0.1\textwidth}|m{0.13\textwidth}|}
+		\hline&&&&&\\[-0.4cm]
+			Begriff & Modell & Grafik & Begriff & Modell & Grafik\\[0.15cm]
+		\hline
+		\hline&&&&&\\[-0.3cm]
+			Komplementäres\newline Ereignis & $\overline{A} = S \setminus A$ & 
+			\begin{tikzpicture}[>=latex', scale=1]
+				\def\s{1.2};
+				\def\r{0.45};
+				\coordinate (a) at (0,0);
+				\draw[CadetRed, line width=0.75,fill=gray!40!white!](0,0)++(\s,\s/2)--++(0,-\s)--++(-2*\s,0)--++(0,\s)--cycle node[below right]{\footnotesize$S$};
+				\draw[blueT, line width=0.75,fill=white](a) circle (\r)node[xshift=\r cm, yshift=-\r cm]{\footnotesize$A$};
+			\end{tikzpicture}&
+			Disjunkte Ereignisse\newline $A$, $B$ & $A\cap B = \emptyset$ & 
+			\begin{tikzpicture}[>=latex', scale=1]
+				\def\s{1.2};
+				\def\r{0.4};
+				\coordinate (a) at (0.5,0);
+				\coordinate (b) at (-0.5,-0);
+				\draw[CadetRed, line width=0.75](0,0)++(\s,\s/2)--++(0,-\s)--++(-2*\s,0)--++(0,\s)--cycle node[below right]{\footnotesize$S$};
+				\draw[greenT, line width=0.75](a) circle (\r)node[xshift=\r cm, yshift=-\r cm]{\footnotesize$B$};
+				\draw[blueT, line width=0.75](b) circle (\r)node[xshift=-\r cm, yshift=-\r cm]{\footnotesize$A$};
+			\end{tikzpicture}\\
+		\hline&&&&&\\[-0.3cm]
+			Vereinigung von\newline $A$ und $B$ & $A\cup B$ & 
+			\begin{tikzpicture}[>=latex', scale=1]
+				\def\s{1.2};
+				\def\r{0.45};
+				\coordinate (a) at (0.25,0);
+				\coordinate (b) at (-0.25,-0);
+				\draw[CadetRed, line width=0.75](0,0)++(\s,\s/2)--++(0,-\s)--++(-2*\s,0)--++(0,\s)--cycle node[below right]{\footnotesize$S$};
+				\draw[gray!40!white! , fill](a) circle (\r);
+				\draw[gray!40!white! , fill](b) circle (\r);
+				\draw[greenT, line width=0.75](a) circle (\r)node[xshift=\r cm, yshift=-\r cm]{\footnotesize$B$};
+				\draw[blueT, line width=0.75](b) circle (\r)node[xshift=-\r cm, yshift=-\r cm]{\footnotesize$A$};
+			\end{tikzpicture}&
+			Sicheres Ereignis & $S$ & 
+			\begin{tikzpicture}[>=latex', scale=1]
+				\def\s{1.2};
+				\draw[CadetRed, line width=0.75,fill=gray!40!white!](0,0)++(\s,\s/2)--++(0,-\s)--++(-2*\s,0)--++(0,\s)--cycle node[below right]{\footnotesize$S$};
+			\end{tikzpicture}\\ 
+		\hline&&&&&\\[-0.3cm]
+			Durchschnitt von\newline $A$ und $B$ & $A\cap B$ & 
+			\begin{tikzpicture}[>=latex', scale=1]
+				\def\s{1.2};
+				\def\r{0.45};
+				\coordinate (a) at (0.25,0);
+				\coordinate (b) at (-0.25,-0);
+				\draw[CadetRed, line width=0.75](0,0)++(\s,\s/2)--++(0,-\s)--++(-2*\s,0)--++(0,\s)--cycle node[below right]{\footnotesize$S$};
+				\draw[gray!40!white!,fill](0, 0.374) arc (123.749:236.251:\r)arc (-56.251:56.251:\r);
+				\draw[greenT, line width=0.75](a) circle (\r)node[xshift=\r cm, yshift=-\r cm]{\footnotesize$B$};
+				\draw[blueT, line width=0.75](b) circle (\r)node[xshift=-\r cm, yshift=-\r cm]{\footnotesize$A$};
+			\end{tikzpicture}& 
+			Unmögliches\newline Ereignis & $\emptyset = \{\;\}$ & 
+			\begin{tikzpicture}[>=latex', scale=1]
+				\def\s{1.2};
+				\draw[CadetRed, line width=0.75](0,0)++(\s,\s/2)--++(0,-\s)--++(-2*\s,0)--++(0,\s)--cycle node[below right]{\footnotesize$S$};
+			\end{tikzpicture}\\  
+		\hline
+		\end{tabularx}
+
+	\section{Wahrscheinlichkeit eines Ereignisses}
+		Die Wahrscheinlichkeit eines Ereignisses ist eine Funktion $P(A)$, welche jedem Ereignis $A \subset S$ eine reelle Zahl zuweist.\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$P(A) = \mylim{n\to\infty}{\dfrac{n_A}{n}}$} $\quad n_A:$ Anzahl Ereignisse $A$ bei $n$ Experimenten\\[0.4cm]
+		\begin{minipage}[t]{0.6\textwidth}
+			\textbf{Axiome der Wahrscheinlichkeit $P(A)$:}\\[-0.2cm]
+			\begin{itemize}
+				\item $0\leq P(A) \leq 1$\\[-0.2cm]
+				\item $P(S) = 1$\\[-0.2cm]
+				\item $P(A\cup B) = P(A) + P(B)\quad$ falls $A$ und $B$ disjunkt sind\\[-0.2cm]
+			\end{itemize}
+		\end{minipage}
+		\begin{minipage}[t]{0.4\textwidth}
+			\textbf{weitere Eigenschaften von $P(A)$:}\\[-0.2cm]
+			\begin{itemize}
+				\item $P(\emptyset)=0$\\[-0.2cm]
+				\item $P(\overline{A}) = 1 - P(A)$\\[-0.2cm]
+				\item $P(A\setminus B) = P(A) - P(A\cap B)$\\[-0.2cm]
+				\item $P(A\cup B) = P(A) + P(B) - P(A\cap B)$\\[-0.2cm]
+				\item $P(A)\leq P(B)\quad$ falls $A\subset B$\\[-0.2cm]
+			\end{itemize}
+		\end{minipage}
+		
+		\vspace*{-0.8cm}\subsection{A-priori- und A-posteriori-Wahrscheinlichkeit }
+			\begin{minipage}{0.49\textwidth}
+				\textbf{A-priori-Wahrscheinlichkeit}\\[0.2cm]
+				Wahrscheinlichkeit aufgrund eines \textbf{physikalischen Gesetzes} oder eines \textbf{Modells} zuweisen.\\
+				\textbf{Bsp:} Münzwurf, Würfelwurf, Zahlenlotto
+			\end{minipage}
+			\begin{minipage}{0.02\textwidth}$ $\end{minipage}
+			\begin{minipage}{0.49\textwidth}
+				\textbf{A-posteriori-Wahrscheinlichkeit}\\[0.2cm]
+				Wahrscheinlichkeit \textbf{empirisch} (experimentell) ermitteln.\\
+				\textbf{Bsp:} Umfälle, Gewinnchancen, bedingte W'keiten
+			\end{minipage}
+	
+	\section{Bedingte Wahrscheinlichkeit}
+		Wahrscheinlichkeit, dass Ereignis $A$ eintritt unter der Annahme, dass Ereignis $B$ eingetroffen ist.\\[0.2cm]
+		\begin{minipage}{0.25\textwidth}
+			\fcolorbox{CadetRed}{white}{$P(A|B) = \dfrac{P(A\cap B)}{P(B)}$}
+		\end{minipage}
+		\begin{minipage}{0.18\textwidth}
+			\textbf{Bsp. HIV-Test:}
+		\end{minipage}
+		\begin{minipage}{0.21\textwidth}
+			\begin{tikzpicture}[>=latex', scale=2, ]
+				\def\s{1.2};
+				\def\stauch{0.7};
+				\def\stauchy{0.8};
+				\draw[CadetRed, line width=0.75](0,0)++(-\stauch*\s,\stauchy*\s/2)node[below right]{\footnotesize$S$}--++(0,-\stauchy*\s)--++(\stauch*2*\s,0)--++(0,\stauchy*\s)--cycle ;
+				\draw[blueT, line width=0.75](0,0)++(\stauch*-3/4*\s,\s/8-0.015)--++(0,-2/8*\s+0.03)--++(\stauch*6/4*\s,0)--++(0,-1/8*\s-0.015)--++(\stauch*1/4*\s-0.015,0)--node[left]{\footnotesize$T$}++(\stauch*0,4/8*\s)--++(-\stauch*1/4*\s+0.015,0)--++(0,-1/8-0.03*\s)--cycle;
+				\draw[greenT, line width=0.75](0,0)++(-\stauch*\s,\s/8)--node[right, xshift=-2]{\footnotesize$H$}++(0,-2/8*\s)--++(\stauch*2*\s,0)--++(\stauch*0,2/8*\s)--cycle;
+			\end{tikzpicture}
+		\end{minipage}
+		\begin{minipage}{0.16\textwidth}
+			$\underrightarrow{\text{Test $T$ positiv}}$
+		\end{minipage}
+		\begin{minipage}{0.2\textwidth}
+			\begin{tikzpicture}[>=latex', scale=2, ]
+				\def\s{1.2};
+				\def\stauch{0.7};
+				\draw[blueT, line width=0.75](0,0)++(\stauch*-3/4*\s,\s/8-0.015)--++(0,-2/8*\s+0.03)--++(\stauch*6/4*\s,0)--++(0,-1/8*\s-0.015)--++(\stauch*1/4*\s-0.015,0)--node[left]{\footnotesize$T$}++(\stauch*0,4/8*\s)--++(-\stauch*1/4*\s+0.015,0)--++(0,-1/8-0.03*\s)--cycle;
+				\draw[greenT, line width=0.75](0,0)++(\stauch*-3/4*\s-0.015,\s/8)--node[right]{\footnotesize$H$}++(0,-2/8*\s)--++(\stauch*7/4*\s,0)--++(\stauch*0,2/8*\s)--cycle;
+			\end{tikzpicture}\\
+			$P(H|T)$
+		\end{minipage}
+
+		\subsection{Abhängige und Unabhängige Ereignisse}
+			\begin{minipage}{0.75\textwidth}
+				\textbf{Unabhängige Ereignisse:}\\[0.2cm]
+				Zwei Ereignisse $A$ und $B$ sind statisch unabhängig, wenn gilt:\\[0.2cm]
+				\fcolorbox{CadetRed}{white}{$P(A\cap B) = P(A)\cdot P(B)$}\\[0.2cm]
+				$P(A|B) = P(A)\quad$ und $\quad P(B|A) = P(B)$\\[0.2cm]
+				$\Rightarrow\quad$ Es kann nicht vom einen Ereignis auf das Andere geschlossen werden.
+			\end{minipage}
+			\begin{minipage}{0.25\textwidth}
+				\begin{tikzpicture}[>=latex', scale=2, ]
+					\def\s{1};
+					\draw[grayT, line width=0.75,fill](0,0)++(0,-\s/6)node[below right,black,yshift=-2,xshift=-2]{\footnotesize$A\cap B$}--++(0,-\s/3)--++(\s/2,0)--++(0,\s/3)--cycle ;
+					\draw[CadetRed, line width=0.75](0,0)++(-\s/2,\s/2)node[below right]{\footnotesize$S$}--++(0,-\s)--++(\s,0)--++(0,\s)--cycle ;
+					\draw[blueT, line width=0.75](0,0)++(0,\s/2)node[below right]{\footnotesize$A$}--++(0,-\s)--++(\s/2,0)--++(0,\s)--cycle ;
+					\draw[greenT, line width=0.75](0,0)++(-\s/2,-\s/6)node[below right]{\footnotesize$B$}--++(0,-\s/3)--++(\s,0)--++(0,\s/3)--cycle ;
+				\end{tikzpicture}
+			\end{minipage}
+
+			\begin{minipage}{0.75\textwidth}
+				\textbf{Abhängige Ereignisse:}\\[0.2cm]
+				$P(A|B)$ bzw. $P(B|A)$ ändert sich je nach Bedingung $B$ bzw. $A$\\[0.2cm]
+				$\Rightarrow\quad$ Es kann vom einen Ereignis auf das Andere geschlossen werden.
+			\end{minipage}
+			\begin{minipage}{0.25\textwidth}
+				\begin{tikzpicture}[>=latex', scale=2, ]
+					\def\s{1};
+					\draw[grayT, line width=0.75,fill](0,0)++(0,-3*\s/12)node[below right,black,xshift=-2]{\footnotesize$A\cap B$}--++(0,-3*\s/12)--++(\s/2,0)--++(0,\s/2)--cycle ;
+					\draw[CadetRed, line width=0.75](0,0)++(-\s/2,\s/2)node[below right]{\footnotesize$S$}--++(0,-\s)--++(\s,0)--++(0,\s)--cycle ;
+					\draw[blueT, line width=0.75](0,0)++(0,\s/2)node[below right]{\footnotesize$A$}--++(0,-\s)--++(\s/2,0)--++(0,\s)--cycle ;
+					\draw[greenT, line width=0.75](0,0)++(-\s/2,-\s/2)--++(\s,\s/2)--++(0,-\s/2)--node[above left=-0.08]{\footnotesize$B$}++(-\s,0);
+				\end{tikzpicture}
+			\end{minipage}
+
+	\section{Satz von der totalen Wahrscheinlichkeit}
+		\vspace*{-0.2cm}\begin{minipage}{0.65\textwidth}
+			Wenn $A_1,...,A_n$ disjunkte Ereignisse sind und $\bigcup\limits_{i=1}^{n} A_i = S$ dann gilt:\\[0.2cm]
+			\fcolorbox{CadetRed}{white}{$P(B) = \mysum{i=1}{n}{P(A_i \cap B)} = \mysum{i=1}{n}{P(B|A_i)\cdot P(A_i)}$}
+		\end{minipage}
+		\begin{minipage}{0.35\textwidth}
+			\begin{tikzpicture}[>=latex', scale=2 ]
+				\def\s{1};
+				\draw[grayT, line width=0.75,rounded corners,fill](0,0)++(-0.9*\s,\s/6)--++(0.1*\s,-\s/3)--++(0.3*\s,0.1*\s)--++(0.4*\s,-0.1*\s)--++(0.5*\s,0.2*\s)--++(0.3*\s,-0.1*\s)--++(0.2*\s,0.2*\s)--++(-0.2*\s,\s/4)--++(-0.3*\s,-0.2*\s)--++(-0.4*\s,0.1*\s)--++(-0.3*\s,-0.1*\s)--++(-0.4*\s,0.1*\s)--cycle ;
+				\foreach \i in {1,...,6}
+				\draw[blueT, line width=0.75](0,0)++(\i/3-4/3*\s,\s/2)--++(0,-\s)--node[above]{\footnotesize$A_{\i}$}++(\s/3,0)--++(0,\s)--cycle ;
+				\draw[CadetRed, line width=0.75](0,0)++(-\s,\s/2)node[below right]{\footnotesize$S$}--++(0,-\s)--++(2*\s,0)--++(0,\s)--cycle ;
+				\draw[greenT, line width=0.75,rounded corners](0,0)++(-0.9*\s,\s/6)node[below right,xshift=2]{\footnotesize$B$}--++(0.1*\s,-\s/3)--++(0.3*\s,0.1*\s)--++(0.4*\s,-0.1*\s)--++(0.5*\s,0.2*\s)--++(0.3*\s,-0.1*\s)--++(0.2*\s,0.2*\s)--++(-0.2*\s,\s/4)--++(-0.3*\s,-0.2*\s)--++(-0.4*\s,0.1*\s)--++(-0.3*\s,-0.1*\s)--++(-0.4*\s,0.1*\s)--cycle ;
+			\end{tikzpicture}
+		\end{minipage}\\[0.2cm]
+
+	\section{Satz von Bayes}
+		\vspace*{-0.1cm}\begin{minipage}{0.48\textwidth}
+			$P(A|B) = \dfrac{P(A\cap B)}{P(B)}\quad;\quad P(B|A) = \dfrac{P(A\cap B)}{P(A)}$\\[0.2cm]
+			\fcolorbox{CadetRed}{white}{$P(A|B) = P(B|A)\cdot \dfrac{P(A)}{P(B)}$}
+		\end{minipage}
+		\begin{minipage}{0.22\textwidth}
+			\begin{tikzpicture}[>=latex', scale=2, ]
+				\def\s{1};
+				\draw[grayT, line width=0.75,fill](0,0)++(\s/4,-\s/6)--++(0,-\s/3)--node[above, black,yshift=2]{\footnotesize$A\cap B$}++(\s/2,0)--++(0,\s/3)--cycle ;
+				\draw[CadetRed, line width=0.75](0,0)++(-3*\s/4,\s/2)node[below right]{\footnotesize$S$}--++(0,-\s)--++(1.5*\s,0)--++(0,\s)--cycle ;
+				\draw[blueT, line width=0.75](0,0)++(\s/4,\s/2)node[below right]{\footnotesize$A$}--++(0,-\s)--++(\s/2,0)--++(0,\s)--cycle ;
+				\draw[greenT, line width=0.75](0,0)++(-3*\s/4,-\s/6)node[below right]{\footnotesize$B$}--++(0,-\s/3)--++(1.5*\s,0)--++(0,\s/3)--cycle ;
+			\end{tikzpicture}
+		\end{minipage}
+		\begin{minipage}{0.25\textwidth}
+			$\qquad\quad\uparrow\qquad\qquad\qquad\quad\uparrow$\\[0.2cm]
+			\fcolorbox{CadetRed}{white}{$P(A_i|B) =  \dfrac{P(B|A_i)\cdot P(A_i)}{\mysum{j=1}{n}{P(B|A_j)\cdot P(A_j)}}$}
+		\end{minipage}\\[0.2cm]
+
+	\section{Zufallsvariabeln}
+		\vspace*{-0.1cm}Eine Zufallsvariable $X(\lambda)$ ist eine Funktion, die jedem Ergebnis $\lambda_i$ eine reelle Zahl zuweist.\\[0.2cm]
+		\begin{minipage}{0.5\textwidth}
+			\begin{tikzpicture}[>=latex', scale=2]
+				\def\s{1};
+				\def\da{0.05};
+				\def\di{0.02};
+				\coordinate (l1) at (0,0);
+				\coordinate (l2) at (0.1,0.28);
+				\coordinate (ln) at (0.2,-0.3);
+				\draw[CadetRed, line width=0.75](ln)circle(0.03) node [above right] {\scriptsize$\lambda_n$};
+				\draw[CadetRed, line width=0.75](l1)circle(0.03) node [above right] {\scriptsize$\lambda_1$};
+				\draw[CadetRed, line width=0.75](l2)circle(0.03) node [above right] {\scriptsize$\lambda_2$};
+				\draw[CadetRed, line width=0.75](-0.2,0.2)circle(0.03);
+				\draw[CadetRed, line width=0.75](-0.4,-0.05)circle(0.03);
+				\draw[CadetRed, line width=0.75](-0.2,-0.3)circle(0.03);
+				\draw[CadetRed, line width=0.75](0,0)++(-\s/2,\s/2)node[below right]{\footnotesize$S$}--++(0,-\s)--++(\s,0)--++(0,\s)--cycle ;
+				\draw[line width=0.5,->](0.7,-0.3)--++(2,0)node[right]{\footnotesize$R$};
+				\draw[line width=0.5](0.7,-0.3)++(1,0.1)--++(0,-0.2)node[below]{\footnotesize$0$};
+				\draw[line width=0.5](0.7,-0.3)++(0.7,0.1)--++(0,-0.2)node[below]{\footnotesize$X(\lambda_1)$};
+				\draw[line width=0.5](0.7,-0.3)++(0.2,0.1)--++(0,-0.2)node[below]{\footnotesize$X(\lambda_n)$};
+				\draw[line width=0.5](0.7,-0.3)++(1.5,0.1)--++(0,-0.2)node[below]{\footnotesize$X(\lambda_2)$};
+				\draw[->] (ln)++(0.05,-0.05) to[out=-45, in=135] (0.9,-0.2+0.02);
+				\draw[->] (l1)++(0.07,0) to[out=-0, in=160] (1.4,-0.2+0.02);
+				\draw[->] (l2)++(0.06,-0.02) to[out=-20, in=135] (2.2,-0.2+0.02);
+			\end{tikzpicture}
+		\end{minipage}
+		\begin{minipage}{0.5\textwidth}
+			\textbf{Bsp. Münze:}$\qquad X(\lambda)=\begin{cases}1 & ,\lambda\in\{\text{Kopf}\} \\-1 & ,\lambda\in\{\text{Zahl}\}\end{cases}$ 
+		\end{minipage}
+% 		\\[0.2cm]
+% 		\textbf{Diskrete Zufallsvariable:} $\mathbb W$ von $X(\lambda)$ besteht endlich oder abzählbar unendlichen vielen Werten\\[0.2cm]
+% 		\textbf{Kontinuierliche Zufallsvariable:} $\mathbb W$ von $X(\lambda)$ besteht aus beliebigen Werten $\in\mathbb R$.
+
+		\subsection{Zweidimensionale Zufallsvariabeln}
+			Die \textbf{zwei Zufallsvariabeln} $X(\lambda)$ und $Y(\lambda)$ weisen jedem Ergebnis $\lambda_i$ des Ergebnisraums $S$ \textbf{zwei reelle Zahlen} zu. Diese zwei Zufallsvariabeln können voneinander \textbf{äbhängig oder unabhängig} sein.\\[0.2cm]
+			\textbf{Bsp:} Prüfungsnote und Erfolgserlebnis der Studenten.
+
+		\subsection{Funktionen von Zufallsvariabeln}
+			Durch anwenden einer Funktion auf eine Zufallsvariable entsteht wiederum eine Zufallsvariable.\\[0.2cm]
+			Zufallsvariable $Y$:$\quad$\fcolorbox{CadetRed}{white}{$Y = g(X)$}$\qquad\Leftrightarrow\qquad$ Zufallsvariable $X$:$\quad$\fcolorbox{CadetRed}{white}{$X = h(Y) = g^{-1}(Y)$}\\[0.2cm]
+			\textbf{Bsp:} Prüfungsnote als Funktion der Punktzahl, Bitwerte als Funktion der Amplitude
+\newpage
+
+	\section{Statistische Kennwerte}
+		\subsection{Erwartungswert}
+			Der Erwartungswert entspricht dem linearen Mittelwert $\mu$.\\[0.2cm]
+			\begin{tabular}{|l||c|c|}
+			\hline&&\\[-0.35cm]
+				$E[...]$ & Diskrete ZV & Kontinuierliche ZV\\[0.1cm]
+			\hline\hline&&\\[-0.4cm]
+				$X$ & $E\left[X\right] = \mysum{i}{}{x_i\cdot p_X(x_i)}$ & $E\left[X\right] = \myint{-\infty}{\infty}{x\cdot f_X(x)}{x}$\\[0.35cm]
+			\hline&&\\[-0.4cm]
+				$Y = g(X)$ & $E\left[Y\right] = \mysum{i}{}{g(x_i)\cdot p_X(x_i)}$ & $E\left[Y\right] = \myint{-\infty}{\infty}{g(x)\cdot f_X(x)}{x}$\\[0.35cm]
+			\hline&&\\[-0.4cm]
+				$Z = g(X,Y)$ & $E\left[Z\right] = \mysum{i}{}{\mysum{j}{}{g(x_i,y_j)\cdot p_{XY}(x_i,y_j)}}$ & $E\left[Z\right] = \myint{-\infty}{\infty}{\myint{-\infty}{\infty}{g(x,y)\cdot f_{XY}(x,y)}{x}}{y}$\\[0.35cm]
+			\hline
+			\end{tabular}\\[0.2cm]
+			\textbf{Rechenregeln:} $\qquad$\fcolorbox{CadetRed}{white}{$\begin{array}{lcll}E[X+Y] & = & E[X] + E[Y] & \\[0.1cm] E[c\cdot X] & = & c\cdot E[X] & \\[0.1cm] E[X\cdot Y] & = & E[X] \cdot E[Y] & \text{wenn $X$, $Y$ unabhängig}\end{array}$}\\[0.1cm]
+
+		\subsection{n.-Moment, (k,n).-Moment und Korrelation}
+			\begin{tabular}{|l||c|c|}
+			\hline&&\\[-0.35cm]
+				& Diskrete ZV & Kontinuierliche ZV\\[0.1cm]
+			\hline&&\\[-0.4cm]
+				$m_n$ & $E\left[X^n\right] = \mysum{i}{}{x_i^n\cdot p_X(x_i)}$ & $m_n = E\left[X^n\right] = \myint{-\infty}{\infty}{x^n\cdot f_X(x)}{x}$\\[0.35cm]
+			\hline&&\\[-0.4cm]
+				$m_{kn}$ & $E\left[X^kY^n\right] = \mysum{j}{}{\mysum{i}{}{x_i^k\,y_j^n\cdot p_{XY}(x_i,y_j)}}$ & $E\left[X^kY^n\right] = \myint{-\infty}{\infty}{\myint{-\infty}{\infty}{x^k\, y^n\cdot f_{XY}(x,y)}{x}}{y}$\\[0.35cm]
+			\hline
+			\end{tabular}\\[0.3cm]
+			\textbf{Korrelation:} $\qquad$\fcolorbox{CadetRed}{white}{$r_{xy} = E\left[XY^*\right]$}\\[0.2cm]
+			$r_{xy} = E\left[XY^*\right] = 0 \quad\Rightarrow\quad X$ und $Y$ sind \textbf{orthogonal zueinander!}\\[-0.3cm]
+
+		\subsection{Varianz und Standardabweichung und Kovarianz}
+			Die \textbf{Varianz} $Var(X)=\sigma_X^2$ und die \textbf{Standardabweichung} $\sigma_X$ sind Masse für die Abweichung einer Zufallsvariable von ihrem Erwartungswert (Mittelwert).\\[0.2cm]
+			\begin{tabular}{|l||c|c|c|}
+			\hline&&&\\[-0.35cm]
+				& allgemein & Diskrete ZV & Kontinuierliche ZV\\[0.1cm]
+			\hline&&&\\[-0.4cm]
+				$Var(X)$ & $\sigma_X^2 = E\left[X^2\right]-E\left[X\right]^2$ & $\sigma_X^2 = \mysum{i}{}{(x_i-E\left[X\right])^2\cdot p_X(x_i)}$ & $\sigma_X^2 = \myint{-\infty}{\infty}{(x-E\left[X\right])^2\cdot f_X(x)}{x}$\\[0.35cm]
+			\hline
+			\end{tabular}\\[0.3cm]
+			\textbf{Rechenregeln:}\\[0.2cm]
+			\fcolorbox{CadetRed}{white}{$\begin{array}{lcll} Var(X+Y) & = & Var(X) + Var(Y) & \text{wenn $X$, $Y$ unabhängig}\\[0.1cm] Var(X+Y) & = & Var(X) + Var(Y) + 2\,Cov(X,Y) & \text{wenn $X$, $Y$ abhängig}\\[0.1cm] Var(c\cdot X) & = & c^2\cdot Var(X) & \\[0.1cm] Var(X\cdot Y) & = & Var(X) \cdot Var(Y) + Var(X)\cdot E[Y]^2 + Var(Y)\cdot E[X]^2 & \end{array}$}\\[0.3cm]
+			\textbf{Kovarianz:} $\qquad$\fcolorbox{CadetRed}{white}{$Cov(X,Y) = \sigma_{XY} = E\left[XY\right] -E\left[X\right]\cdot E\left[Y\right] = r_{xy} - \mu_X\cdot \mu_Y$}\\[0.2cm]
+			$\sigma_{XY} = 0 \quad\Rightarrow\quad X$ und $Y$ sind \textbf{unkorreliert}\\[0.3cm]
+			\textbf{Korrelations-Koeffizient:} $\qquad$\fcolorbox{CadetRed}{white}{$\rho(X,Y) = \rho_{X,Y} = \dfrac{\sigma_{XY}}{\sigma_X\cdot\sigma_Y}$}$\qquad |\rho_{XY}|\leq 1$\\[0.2cm]
+			
+			\fcolorbox{CadetRed}{white}{unabhängig$\quad\Rightarrow\quad$unkorreliert}
+
+\newpage
+	\section{Wahrscheinlichkeitsverteilungen}
+		\subsection{Verteilungsfunktion}
+			Die Verteilungsfunktion ist definiert als:$\qquad$\fcolorbox{CadetRed}{white}{$F_X(x) = P(X\leq x)$}\\[0.2cm]
+			Sie hat folgende \textbf{Eigenschaften:}\\
+			\begin{minipage}{0.5\textwidth}
+				\begin{itemize}
+					\item $0\leq F_X(x)\leq 1$\\[-0.35cm]
+					\item $F_X(a)\leq F_X(b)\quad$ für $\; a < b$\\[-0.35cm]
+				\end{itemize}
+			\end{minipage}
+			\begin{minipage}{0.5\textwidth}
+				\begin{itemize}
+					\item $F_X(-\infty) = 0$\\[-0.35cm]
+					\item $F_X(\infty) = 1$\\[-0.35cm]
+					\item $F_X(x)$ ist monoton wachsend
+				\end{itemize}
+			\end{minipage}				
+
+		\subsection{Wahrscheinlichkeitsmassefunktion und Wahrscheinlichkeitsdichtefunktion}
+			\begin{minipage}{0.49\textwidth}
+				\textbf{Wahrscheinlichkeitsmassefunktion:}\\[0.2cm]
+					Die Höhe der Treppenstufen der Verteilungsfunktion ist ein Mass für die Auftretenswahrscheinlichkeit der Werte $x_i$ und entspricht gerade dem Wert der Wahrscheinlichkeitsmassefunktion an der Stelle $x_i$.\\[0.2cm]
+					Es gilt:$\quad$\fcolorbox{CadetRed}{white}{$F_X(x) = \mysum{x_i\leq x}{}{p_X(x_i)}$}\\[0.2cm]
+					\begin{itemize}
+						\item $0\leq p_X(x_i)\leq 1 \quad\forall i$\\[-0.35cm]
+						\item $p_X(x)= 0 \quad$ für $x\neq x_i$\\[-0.35cm]
+						\item $\mysum{i}{}{p_X(x_i)}=1$
+					\end{itemize}
+			\end{minipage}\begin{minipage}{0.02\textwidth}$ $\end{minipage}
+			\begin{minipage}{0.49\textwidth}
+				\textbf{Wahrscheinlichkeitsdichtefunktion:}\\[0.2cm]
+					Die Steigung der Verteilungsfunktion an der Stelle $x$ ist ein Mass für die Auftretenswahrscheinlichkeit von Werten im Bereich von $x$ und entspricht gerade dem Wert der Wahrscheinlichkeitsdichtefunktion an der Stelle $x$\\[0.2cm]
+					Es gilt: $\quad$\fcolorbox{CadetRed}{white}{$f_X(x) = F_X'(x)$}$\quad$\fcolorbox{CadetRed}{white}{$F_X(x) = \myint{-\infty}{x}{f_X(\tau)}{\tau}$}\\[0.2cm]
+					\begin{itemize}
+						\item $f_X(x)\geq 0 $\\[-0.35cm]
+						\item $\myint{-\infty}{\infty}{f_X(x)}{x}=1$
+					\end{itemize}
+
+			\end{minipage}	
+
+		\subsection{Übersicht}
+			\begin{tabularx}{\textwidth}{|X|c|c|}
+			\hline&&\\[-0.35cm]
+				& \textbf{Diskrete Zufallsvariable $X$} & \textbf{Kontinuierliche Zufallsvariable $X$}\\[0.15cm]
+			\hline&\multicolumn{2}{c|}{$ $}\\[-0.35cm]
+				& \multicolumn{2}{c|}{\textbf{\textcolor{blueT}{Verteilungsfunktion}}}\\[0.15cm]
+				& \begin{tikzpicture}[>=latex', scale=2]
+					\def\r{0.025};
+					\draw[line width=0.5,->](-0.2,0)--(2.2,0)node[right]{\footnotesize$x$};
+					\draw[line width=0.5,->](0,-0.2)--(0,1.2)node[right]{\footnotesize$F_X(x)$};
+					\draw[smooth,samples=1000,domain=-0.2:1/6, blueT, line width=1 ] plot (\x,{0});
+					\draw[smooth,samples=1000,domain=1/6:3/6, blueT, line width=1 ] plot (\x,{1/12});
+					\draw[smooth,samples=1000,domain=3/6:5/6, blueT, line width=1 ] plot (\x,{3/12});
+					\draw[smooth,samples=1000,domain=5/6:7/6, blueT, line width=1 ] plot (\x,{6/12});
+					\draw[smooth,samples=1000,domain=7/6:9/6, blueT, line width=1 ] plot (\x,{9/12});
+					\draw[smooth,samples=1000,domain=9/6:11/6, blueT, line width=1 ] plot (\x,{0.916667});
+					\draw[smooth,samples=1000,domain=11/6:2.2, blueT, line width=1 ] plot (\x,{12/12});
+					\draw[blueT, line width=0.75,fill=white](1/6,0)circle(\r);
+					\draw[blueT, line width=0.75,fill](1/6,1/12)circle(\r);
+					\draw[blueT, line width=0.75,fill=white](3/6,1/12)circle(\r);
+					\draw[blueT, line width=0.75,fill](3/6,3/12)circle(\r);
+					\draw[blueT, line width=0.75,fill=white](5/6,3/12)circle(\r);
+					\draw[blueT, line width=0.75,fill](5/6,6/12)circle(\r);
+					\draw[blueT, line width=0.75,fill=white](7/6,6/12)circle(\r);
+					\draw[blueT, line width=0.75,fill](7/6,9/12)circle(\r);
+					\draw[blueT, line width=0.75,fill=white](9/6,9/12)circle(\r);
+					\draw[blueT, line width=0.75,fill](9/6,11/12)circle(\r);
+					\draw[blueT, line width=0.75,fill=white](11/6,11/12)circle(\r);
+					\draw[blueT, line width=0.75,fill](11/6,12/12)circle(\r);
+					\draw[line width=0.5,gray](3/6,0.1)--(3/6,-0.1) node [below] {\footnotesize$a$};
+					\draw[line width=0.25,dashed,gray](3/6,-0.05)--(3/6,0.35);
+					\draw[line width=0.5,gray](7/6,0.1)--(7/6,-0.1) node [below] {\footnotesize$b$};
+					\draw[line width=0.25,dashed,gray](7/6,-0.05)--(7/6,0.83);
+				\end{tikzpicture} & 
+				\begin{tikzpicture}[>=latex', scale=2]
+					\draw[line width=0.5,->](-0.2,0)--(2.2,0)node[right]{\footnotesize$x$};
+					\draw[line width=0.5,->](0,-0.2)--(0,1.2)node[right]{\footnotesize$F_X(x)$};
+					\draw[smooth,samples=1000,domain=-0.2:0, blueT, line width=1 ] plot (\x,{0});
+					\draw[smooth,samples=1000,domain=0:2.2, blueT, line width=0.75 ] plot (\x,{1-exp(-2*\x)});
+					\draw[line width=0.5](0.1,1)--(-0.1,1) node [left] {\footnotesize$1$};
+					\draw[line width=0.25,dashed](-0.1,1)--(2.2,1);
+					\draw[line width=0.5,gray](3/6,0.1)--(3/6,-0.1) node [below] {\footnotesize$a$};
+					\draw[line width=0.25,dashed,gray](3/6,0)--(3/6,0.7);
+					\draw[line width=0.5,gray](7/6,0.1)--(7/6,-0.1) node [below] {\footnotesize$b$};
+					\draw[line width=0.25,dashed,gray](7/6,0.05)--(7/6,0.95);
+				\end{tikzpicture}\\
+				& $P(a< X\leq b) = F_X(b)-F_X(a)$ & $P(a< X\leq b) = F_X(b)-F_X(a)$\\[0.15cm]
+			\hline&&\\[-0.35cm]
+				& \textbf{\textcolor{CadetRed}{Wahrscheinlichkeitsmassefunktion}} & \textbf{\textcolor{CadetRed}{Wahrscheinlichkeitsdichtefunktion}}\\
+				& \begin{tikzpicture}[>=latex', scale=2]
+					\draw[line width=0.5,->](-0.2,0)--(2.2,0)node[right]{\footnotesize$x$};
+					\draw[line width=0.5,->](0,-0.2)--(0,1.2)node[right]{\footnotesize$p_X(x)$};
+					\draw[smooth,samples=1000,domain=-0.2:2.1, CadetRed, line width=1 ] plot (\x,{0});
+					\foreach \i in {1,6}
+					\draw[line width=1,CadetRed](\i/3-1/6,0)--(\i/3-1/6,1/3);
+					\foreach \i in {2,5}
+					\draw[line width=1,CadetRed](\i/3-1/6,0)--(\i/3-1/6,2/3);
+					\foreach \i in {3,4}
+					\draw[line width=1,CadetRed](\i/3-1/6,0)--(\i/3-1/6,1);
+					\foreach \i in {1,6}
+					\draw[line width=1,CadetRed](\i/3-1/6-0.05,1/3)--(\i/3-1/6+0.05,1/3);
+					\foreach \i in {2,5}
+					\draw[line width=1,CadetRed](\i/3-1/6-0.05,2/3)--(\i/3-1/6+0.05,2/3);
+					\foreach \i in {3,4}
+					\draw[line width=1,CadetRed](\i/3-1/6-0.05,1)--(\i/3-1/6+0.05,1);
+					\draw[line width=0.5,gray](3/6,0.1)--(3/6,-0.1) node [below] {\footnotesize$a$};
+					\draw[line width=0.5,gray](7/6,0.1)--(7/6,-0.1) node [below] {\footnotesize$b$};
+				\end{tikzpicture} & 
+				\begin{tikzpicture}[>=latex', scale=2]
+					\draw[line width=0.5,->](-0.2,0)--(2.2,0)node[right]{\footnotesize$x$};
+					\draw[line width=0.5,->](0,-0.2)--(0,1.2)node[right]{\footnotesize$f_X(x)$};
+					\draw[smooth,samples=1000,domain=-0.2:0, CadetRed, line width=1 ] plot (\x,{0});
+					\draw[smooth,samples=1000,domain=0:2.1, CadetRed, line width=0.75 ] plot (\x,{1/2*2*exp(-2*\x)});
+					\draw[line width=0.5,gray](3/6,0.1)--(3/6,-0.1) node [below] {\footnotesize$a$};
+					\draw[line width=0.25,dashed,gray](3/6,0.05)--(3/6,0.45);
+					\draw[line width=0.5,gray](7/6,0.1)--(7/6,-0.1) node [below] {\footnotesize$b$};
+					\draw[line width=0.25,dashed,gray](7/6,0.05)--(7/6,0.2);
+				\end{tikzpicture}\\
+				& $P(a< X\leq b) = \mysum{a}{b}{p_X(x_i)}$ & $P(a< X\leq b) = \myint{a}{b}{f_X(x_i)}{x}$\\[0.25cm]
+			\hline&&\\[-0.35cm]
+				\textbf{Erwartungswert} & $E(X) = \mysum{i}{}{x_i\cdot p_X(x_i)}$ & $E(X) = \myint{-\infty}{\infty}{x\cdot f_X(x)}{x}$ \\[0.25cm]
+			\hline&&\\[-0.35cm]
+				\textbf{stat. Leistung:} & $E(X^2) = \mysum{i}{}{x_i^2\cdot p_X(x_i)}$ & $E(X^2) = \myint{-\infty}{\infty}{x^2\cdot f_X(x)}{x}$ \\[0.25cm]
+			\hline
+			\end{tabularx}
+\newpage
+		\subsection{Verbundfunktionen von zweidimensionalen Zufallsvariabeln}
+			Die Wahrscheinlichkeitverteilungsfunktionen können auch Funktionen zweier Zufallsvariabeln/Variabeln sein.\\[0.2cm]
+			\begin{minipage}{0.3\textwidth}
+				\begin{itemize}
+					\item $F_X(x)$, $F_Y(y)$\\[-0.35cm]
+					\item $p_X(x)$, $p_Y(y)$\\[-0.35cm]
+					\item $f_X(x)$, $f_Y(y)$
+				\end{itemize}
+			\end{minipage}
+			\begin{minipage}{0.1\textwidth}
+				\text{\Large$\Rightarrow$}
+			\end{minipage}
+			\begin{minipage}{0.6\textwidth}
+				\begin{itemize}
+					\item Verbundverteilungsfunktion $F_{XY}(x,y)$\\[-0.35cm]
+					\item Verbundwahrscheinlichkeitsmassefunktion $p_{XY}(x,y)$\\[-0.35cm]
+					\item Verbundwahrscheinlichkeitsdichtefunktion $f_{XY}(x,y)$
+				\end{itemize}
+			\end{minipage}			
+
+			Die Verbundfunktionen beschreiben die Abhängigkeiten zwischen den beiden Zufallsvariabeln $X$ und $Y$.\\[0.2cm]
+			Für \textbf{statisch unabhängige} Zufallsvariabeln gilt:\\[0.2cm]
+			\fcolorbox{CadetRed}{white}{$\begin{matrix} F_{XY}(x,y) & = & F_X(x)\cdot F_Y(y)\\[0.15cm] p_{XY}(x,y) & = & p_X(x)\cdot p_Y(y)\\[0.15cm]f_{XY}(x,y) & = & f_X(x)\cdot f_Y(y)\end{matrix}$}$\qquad$\text{\Large$\Leftrightarrow$}$\qquad $
+			\fcolorbox{CadetRed}{white}{$\begin{matrix} F_X(x) & = & F_{XY}(x,\infty)\\[0.15cm] p_X(x_i) & = & \mysum{y_j}{}{p_{XY}(x_i,y_j)}\\[0.15cm]f_X(x) & = & \myint{-\infty}{\infty}{f_{XY}(x,y)}{y}\end{matrix}$}
+
+
+	\section{Spezielle Wahrscheinlichkeitsverteilungen}
+		\subsection{Binomialverteilung}
+			Die Binomialverteilung wird für Bernoulli-Experimente gebraucht.\\[0.2cm]
+			\textbf{Bernoulli-Experiment:} Experiment mit 2 möglichen Ergebnissen ($0$ oder $1$)\\[0.2cm]
+			$X = \begin{cases}1,& \text{mit W'keit }p\\0,& \text{mit W'keit }1-p\end{cases}$\\[0.2cm]
+			Experiment wird $n$-mal durchgeführt$\quad\rightarrow\quad$ Wahrscheinlichkeit, dass $X=1$ $k$-mal eingetreten ist:\\[0.2cm]
+			\fcolorbox{CadetRed}{white}{$p_X(k) = P(X=k) = \dbinom{n}{k} p^k\cdot (1-p)^{n-k}$}$\quad \dbinom{n}{k} = \dfrac{n!}{k!\,(n-k)!}$\\
+
+			\begin{minipage}{0.4\textwidth}
+				\textbf{Verteilungsfunktion:}
+			\end{minipage}
+			\begin{minipage}{0.3\textwidth}
+				\textbf{Erwartungswert:}
+			\end{minipage}
+			\begin{minipage}{0.3\textwidth}
+				\textbf{Varianz:}
+			\end{minipage}
+
+			\begin{minipage}{0.4\textwidth}
+				\fcolorbox{CadetRed}{white}{$F_X(x)=\mysum{k=0}{k\leq x}{\dbinom{n}{k} p^k\cdot (1-p)^{n-k}}$}
+			\end{minipage}
+			\begin{minipage}{0.3\textwidth}
+				\fcolorbox{CadetRed}{white}{$E(X)=n\cdot p$}
+			\end{minipage}
+			\begin{minipage}{0.3\textwidth}
+				\fcolorbox{CadetRed}{white}{$Var(X)=n\cdot p\cdot (1-p)$}
+			\end{minipage}
+
+			\begin{minipage}{0.65\textwidth}
+				\textbf{Approximationen der Binomialverteilung mit}\\[-0.25cm]
+				\begin{itemize}
+					\item Poissonverteilung mit $\alpha = n\cdot p$\\[0.15cm]
+						Falls $p<0.05$ und $n>10$\\[-0.25cm]
+					\item Normalverteilung mit $\mu = n\cdot p$ und $\sigma = \sqrt{n\cdot p \cdot (1-p)}$\\[0.15cm]
+						Falls $n\cdot p \cdot (1-p) > 9$
+				\end{itemize}
+			\end{minipage}
+			\begin{minipage}{0.35\textwidth}
+				\begin{tikzpicture}[>=latex', scale=1.5]
+					\def\si{0.5};
+					\def\u{1.5};
+					\path[fill=gray!60] ++(1.05,0) -- plot[smooth,domain=1.05:1.35](\x,{2/(sqrt(2*pi)*\si)*exp(-1/2*((\x-\u)/\si)^2)}) --(1.35,0)--(1.05,0) ;
+					\draw[line width=0.5,->](-0.2,0)--(3.4,0)node[right]{\footnotesize$x$};
+					\draw[line width=0.5,->](0,-0.2)--(0,1.8)node[right]{\footnotesize$f_X(x)$};
+					\draw[smooth,samples=100,domain=-0.2:3.2, CadetRed, line width=0.75 ] plot (\x,{2/(sqrt(2*pi)*\si)*exp(-1/2*((\x-\u)/\si)^2)});
+					\draw[smooth,samples=100,domain=1.15:1.35, CadetRed, line width=0.75 ,fill] plot (\x,{2/(sqrt(2*pi)*\si)*exp(-1/2*((\x-\u)/\si)^2)});
+					\draw[line width=0.75,blueT,->](1.5,0)--(1.5,1.6);
+					\draw[line width=0.75,blueT,->](1.2,0)--(1.2,1.34);
+					\draw[line width=0.75,blueT,->](1.8,0)--(1.8,1.34);
+					\draw[line width=0.75,blueT,->](0.9,0)--(0.9,0.78);
+					\draw[line width=0.75,blueT,->](2.1,0)--(2.1,0.78);
+					\draw[line width=0.75,blueT,->](0.6,0)--(0.6,0.32);
+					\draw[line width=0.75,blueT,->](2.4,0)--(2.4,0.32);
+					\draw[line width=0.75,blueT,->](0.3,0)--(0.3,0.1);
+					\draw[line width=0.75,blueT,->](2.7,0)--(2.7,0.1);
+					\draw[line width=0.75,blueT](0,0)--(0,0.025);
+					\draw[line width=0.75,blueT](3,0)--(3,0.025);
+					\draw[line width=0.5, orange!90!black!](1.5,0.1)--(1.5,-0.1) node [below] {\footnotesize$\mu=E(X)$};
+					\draw[line width=0.5, orange!90!black!,<->](1.5,0.85)--(0.93,0.85);
+					\draw[line width=0.5, orange!90!black!,<->](1.5,0.85)--(2.07,0.85) node [above right] {\footnotesize$\sigma=  \sqrt{Var(X)}$};
+				\end{tikzpicture}
+			\end{minipage}
+
+		\subsection{Poissonverteilung}
+			\begin{minipage}{0.4\textwidth}
+				\textbf{Wahrscheinlichkeitsmassefunktion:}
+			\end{minipage}
+			\begin{minipage}{0.25\textwidth}
+				\textbf{Verteilungsfunktion:}
+			\end{minipage}
+			\begin{minipage}{0.35\textwidth}
+				\textbf{Erwartungswert und Varianz:}
+			\end{minipage}
+
+			\begin{minipage}{0.4\textwidth}
+				\fcolorbox{CadetRed}{white}{$p_X(k) = P(X=k) = \e^{-\alpha}\cdot\dfrac{\alpha^k}{k!}$}
+			\end{minipage}
+			\begin{minipage}{0.25\textwidth}
+				\fcolorbox{CadetRed}{white}{$F_X(x)= \e^{-\alpha}\cdot\mysum{k=0}{k\leq x}{\dfrac{\alpha^k}{k!}}$}
+			\end{minipage}
+			\begin{minipage}{0.35\textwidth}
+				\fcolorbox{CadetRed}{white}{$E(X)= Var(X) = \alpha$}
+			\end{minipage}\\[0.2cm]
+			$k:$ bspw. Anzahl Fehler einer sehr langen Bitfolge.$\qquad\qquad\alpha=n\cdot p:$ bspw. mittlere Fehlerrate
+\newpage
+		\subsection{Normalverteilung (Gaussverteilung)}
+			\begin{minipage}{0.5\textwidth}
+				\textbf{Wahrscheinlichkeitsdichtefunktion:}
+			\end{minipage}
+			\begin{minipage}{0.25\textwidth}
+				\textbf{Erwartungswert:}
+			\end{minipage}
+			\begin{minipage}{0.25\textwidth}
+				\textbf{Varianz:}
+			\end{minipage}
+
+			\begin{minipage}{0.5\textwidth}
+				\fcolorbox{CadetRed}{white}{$f_X(x) = \dfrac{1}{\sigma\sqrt{2\pi}}\cdot \e^{\frac{-(x-\mu)^2}{2\,\sigma^2}}$}
+			\end{minipage}
+			\begin{minipage}{0.25\textwidth}
+				\fcolorbox{CadetRed}{white}{$E(X)= \mu$}
+			\end{minipage}
+			\begin{minipage}{0.25\textwidth}
+				\fcolorbox{CadetRed}{white}{$Var(X) = \sigma^2$}
+			\end{minipage}
+
+			\begin{minipage}{0.65\textwidth}
+				\textbf{Verteilungsfunktion:}\\[0.2cm]
+				\fcolorbox{CadetRed}{white}{$F_X(x)= \dfrac{1}{\sqrt{2\pi}}\myint{-\infty}{(x-\mu)/\sigma}{\e^{-\xi^2/2}}{\xi} = Q\left(\dfrac{\mu-x}{\sigma}\right) = 1 - Q\left(\dfrac{x-\mu}{\sigma}\right)$}\\[0.2cm]
+				für $z<0$: $\quad Q(-z) = 1 - Q(z)$\\[0.2cm]
+				Werte der $Q-$Funktion siehe Schaum S.326
+			\end{minipage}
+			\begin{minipage}{0.35\textwidth}
+				\begin{tikzpicture}[>=latex', scale=1.5]
+					\def\si{0.5};
+					\def\u{1.5};
+					\path[fill=gray!60] ++(1.9,0) -- plot[smooth,domain=1.9:3.2](\x,{2/(sqrt(2*pi)*\si)*exp(-1/2*((\x-\u)/\si)^2)}) --(3.2,0)--(1.9,0) ;
+					\draw[line width=0.5,->](-0.2,0)--(3.4,0)node[right]{\footnotesize$x$};
+					\draw[line width=0.5,->](0,-0.2)--(0,1.8)node[right]{\footnotesize$f_X(x)$};
+					\draw[smooth,samples=100,domain=-0.2:3.2, CadetRed, line width=0.75 ] plot (\x,{2/(sqrt(2*pi)*\si)*exp(-1/2*((\x-\u)/\si)^2)});
+					\draw[smooth,samples=100,domain=1.15:1.35, CadetRed, line width=0.75 ,fill] plot (\x,{2/(sqrt(2*pi)*\si)*exp(-1/2*((\x-\u)/\si)^2)});
+					\draw[line width=0.75,blueT](1.9,0.1)--(1.9,-0.1)node[below]{$z$};
+					\draw[line width=0.75,blueT,dashed](1.9,0.05)node[above right=-0.13]{$Q(z)$}--(1.9,1.15);
+					\draw[line width=0.5, orange!90!black!,dashed](1.5,0)--(1.5,1.6);
+					\draw[line width=0.5, orange!90!black!](1.5,0.1)--(1.5,-0.1) node [below,xshift=-8] {\footnotesize$\mu=E(X)$};
+					\draw[line width=0.5, orange!90!black!,<->](1.5,0.85)--(0.93,0.85);
+					\draw[line width=0.5, orange!90!black!,<->](1.5,0.85)--(2.07,0.85) node [above right] {\footnotesize$\sigma=  \sqrt{Var(X)}$};
+				\end{tikzpicture}
+			\end{minipage}
+
+	\section{Kombinatorik}
+\renewcommand{\arraystretch}{1.5}
+		\begin{tabularx}{\textwidth}{|m{5.66cm}|m{5.66cm}|m{5.66cm}|}
+		\hline
+			\textbf{Produktregel} & \textbf{Permutatuon:\newline Reihenfolge} & \textbf{Kombinationen:\newline Auswahl}\\
+		\hline
+			Für jede der $n_1$ Möglichkeiten an Position $1$ gibt es $n_2$ Möglichkeiten für Position $n_2$, ... & Auf wie viele Arten lassen sich $n$ verschiedene Objekte anordnen?\newline  & Auf wie viele Arten kann man $k$ Objekte aus $n$ auswählen?\newline\\
+			\fcolorbox{CadetRed}{white}{$\prod\limits_{i=1}^{k}{n_i}$} & \fcolorbox{CadetRed}{white}{$P_n = n!$} & \fcolorbox{CadetRed}{white}{$C_k^n = \dbinom{n}{k} = \dfrac{n!}{k!\,(n-k)!} $}\\[0.4cm]
+		\hline
+		\end{tabularx}
+\renewcommand{\arraystretch}{1}
+
+
+\chapter{Zufallsprozesse \small{\textcolor{black}{S.165}}}
+	\section{Definition Zufallsprozess}
+		Ein Zufallsprozess $X(t,\lambda)$ bzw. $X(t)$ ist eine Funktion, die jedem \textbf{zufälligen Ergebnis} $\lambda_i$ eine \textbf{deterministische Funktion} $x_i(t)$ zuweist.$\quad\rightarrow\quad X(t,\lambda_i) = x_i(t)$\\
+		\begin{minipage}{0.4\textwidth}
+			\begin{tikzpicture}[>=latex', scale=2]
+				\def\s{1.5};
+				\coordinate (l1) at (0.1,0.8);
+				\coordinate (l2) at (-0.3,0.2);
+				\coordinate (ln) at (0,-0.4);
+				\draw[CadetRed, line width=0.75](ln)circle(0.03) node [above right] {\scriptsize$\lambda_n$};
+				\draw[CadetRed, line width=0.75](l1)circle(0.03) node [above right] {\scriptsize$\lambda_1$};
+				\draw[CadetRed, line width=0.75](l2)circle(0.03) node [above right] {\scriptsize$\lambda_2$};
+				\draw[CadetRed, line width=0.75](-0.5,0.7)circle(0.03);
+				\draw[CadetRed, line width=0.75](-0.5,-0.3)circle(0.03);
+				\draw[CadetRed, line width=0.75](-0.3,-0.9)circle(0.03);
+				\draw[CadetRed, line width=0.75](0,0)++(-\s/2,3/4*\s)node[below right]{\footnotesize$S$}--++(0,-3/2*\s)--++(3/4*\s,0)--++(0,3/2*\s)--cycle ;
+				\begin{scope}[yshift=1.5cm]
+					\draw[line width=0.5,->](0.7,-0.5)--++(2,0)node[right]{\footnotesize$t$};
+					\draw[line width=0.5,->](1.2,-0.7)--++(0,0.6)node[right]{\footnotesize$x_1(t)$};
+					\draw[smooth,samples=100,domain=0.7:2.7, blueT, line width=0.75] plot (\x,{0.2*sin(5*\x*180/pi+16)-0.5});
+					\draw[line width=0.5](2.2,-0.8)--++(0,0.7)node[above]{\footnotesize$X_k$};
+					\draw[line width=0.5,->,fill,CadetRed](2.2,-0.695) circle (0.02)node[below left=-0.1]{\footnotesize$X(\lambda_1,t_k)$};
+				\end{scope}
+				\begin{scope}[yshift=0.6cm]
+					\draw[line width=0.5,->](0.7,-0.5)--++(2,0)node[right]{\footnotesize$t$};
+					\draw[line width=0.5,->](1.2,-0.7)--++(0,0.6)node[right]{\footnotesize$x_2(t)$};
+					\draw[smooth,samples=100,domain=1.3:4.75, blueT, line width=0.75] plot (0.55*\x,{(1*(\x-1.3)^3*(\x-4.3)^2)/15-0.8});
+					\draw[line width=0.5](2.2,-1.3)--++(0,1.4);
+					\draw[line width=0.5,->,fill,CadetRed](2.2,-0.68) circle (0.02)node[below left=-0.1]{\footnotesize$X(\lambda_2,t_k)$};
+				\end{scope}
+				\begin{scope}[yshift=-0.5cm]
+					\draw[line width=0.5,->](0.7,-0.5)--++(2,0)node[right]{\footnotesize$t$};
+					\draw[line width=0.5,->](1.2,-0.7)--++(0,0.6)node[right]{\footnotesize$x_n(t)$};
+					\draw[smooth,samples=100,domain=0.7:2.7, blueT, line width=0.75] plot (\x,{0.3*(\x-0.6*\x^2+sin(\x*180)-1.2)});
+					\draw[line width=0.5](2.2,-0.8)node[below]{\footnotesize$t_k$}--++(0,0.7);
+					\draw[line width=0.5,->,fill,CadetRed](2.2,-0.395) circle (0.02)node[above left=-0.1]{\footnotesize$X(\lambda_n,t_k)$};
+				\end{scope}
+				\draw[->,line width=0.5] (l1)++(0.06,-0.02) to[out=-20, in=160] (0.95,1.2);
+				\draw[->,line width=0.5] (l2)++(0.06,-0.02) to[out=-20, in=160] (0.95,0.3);
+				\draw[->,line width=0.5] (ln)++(0.05,-0.05) to[out=-45, in=160] (0.95,-0.8);
+			\end{tikzpicture}
+		\end{minipage}
+		\begin{minipage}{0.6\textwidth}
+			\begin{itemize}
+				\item Die Funktion $x_i(t)$ ist im Normalfall \textbf{deterministisch} und reellwertig\\[-0.35cm]
+				\item Alle $x_i(t)$ bilden eine Schar von Probefunktionen.\\[-0.35cm]
+				\item Für einen \textbf{ausgewählten Zeitpunkt} $t_k$ definiert $X(t_k,\lambda)$ eine Zufallsvariable $X_k(\lambda)$ bzw. $X_k$\\$\rightarrow\quad X(t_k,\lambda_i) = x_i(t_k)$\\[-0.2cm]
+			\end{itemize}
+			\hspace*{0.55cm}\textbf{Bsp.} $x_\lambda(t) = \cos(\omega_c t+\varphi_\lambda)$\\[0.2cm]
+			\hspace*{0.55cm}Dies ist ein deterministisches Signal mit einer zeitlich\\\hspace*{0.55cm}konstanten, von $\lambda$ abhängigen zufälligen, Phasenlage $\varphi_\lambda$
+		\end{minipage}\\[-0.6cm]
+
+		\subsubsection{Statistische Beschreibung von Zufallsprozessen}
+			Für jedes $t_k$ kann die Zufallsvariable $X_k(\lambda)$ bzw. $X_k$ statisch beschrieben werden:\\[0.2cm]
+			\begin{tabularx}{\textwidth}{|p{4cm}|p{5.25cm}|p{7.75cm}|}
+			\hline&&\\[-0.3cm]
+				& 1-Dimensionale ZV & 2-Dimensionale ZV\\[0.15cm]
+			\hline&&\\[-0.3cm]
+				\textbf{Verteilungsfunktion} & $F_{X_k}(x_k;t_k) = P(X_k(t_k)\leq x_k)$ & $F_{X}(x_1,x_2;t_1,t_2) = P(X(t_1)\leq x_1,X(t_2)\leq x_2)$\\[0.2cm]
+			\hline&&\\[-0.3cm]
+				\multicolumn{1}{|m{4cm}|}{\textbf{Wahrscheinlichkeits-\newline dichtefunktion}} & $f_{X_k}(x_k;t_k) = \dfrac{\partial F_{X_k}(x_k;t_k)}{\partial x_k}$ & $f_{X}(x_1,x_2;t_1,t_2) = \dfrac{\partial^2 F_{X}(x_1,x_2;t_1,t_2)}{\partial x_1\,\partial x_2}$\\[0.35cm]
+			\hline
+			\end{tabularx}\\[0.2cm]
+
+		\section{Statistische Kennwerte (Scharmittel)}
+			Bei den statischen Kennwerten handelt es sich um Mittelwerte über die ganze Schar von Probefunktionen. D.h. die Funktionswerte der Probefunktionen $x_i(t)$ werden zu jedem Zeitpunkt $t$ gemittelt. Dies ergibt Kennwertfunktionen, die von der Zeit $t$ abhängig sind.\\[0.2cm]
+			\begin{tabular}{|l|l|}
+			\hline&\\[-0.35cm]
+				\textbf{Erwartungswert} & $\mu_X(t) = E[X(t)] = \myint{-\infty}{\infty}{x\cdot f_X(x;t)}{x}$\\[0.35cm]
+			\hline&\\[-0.35cm]
+				\textbf{Autokorrelation} & $R_{XX}(t_1,t_2)= E[X(t_1)X(t_2)] = \myint{-\infty}{\infty}{\myint{-\infty}{\infty}{x_1\cdot x_2\cdot f_X (x_1,x_2;t_1,t_2)}{x_1}}{x_2}$\\[0.35cm]
+			\hline&\\[-0.3cm]
+				\textbf{Autokovarianz} & $C_{XX}(t_1,t_2) = E[(X(t_1)-\mu_X(t_1))\cdot (X(t_2)-\mu_X(t_2))] = R_{XX}(t_1,t_2)-\mu_X(t_1)\cdot\mu_X(t_2)$\\[0.2cm]
+			\hline
+			\end{tabular}\\[0.2cm]
+
+		\section{Zeitliche Mittelwerte}
+			\subsection{Zeitmittelwerte einer Musterfunktion $x_i(t)$}
+				Der \textbf{zeitliche Mittelwert} einer Probefunktion $x_i(t)$, des Zufallsprozesses $X(t)$, ist wie folgt definiert:\\[0.2cm]
+				\begin{tabular}{|l|l|}
+				\hline&\\[-0.35cm]
+					\textbf{Mittelwert der Funktion $x_i(t)$} & $\overline {x_i} = \langle x_i(t)\rangle = \mylim{t\to\infty}{\frac{1}{T}\myint{-T/2}{T/2}{x(t)_i}{t}}$\\[0.35cm]
+				\hline&\\[-0.35cm]
+					\textbf{Mittelwert der Autokorrelation $R_{X_iX_i}(\tau)$} & $\overline{R}_{X_iX_i}(\tau) = \langle x_i(t)\cdot x_i(t+\tau)\rangle = \mylim{t\to\infty}{\frac{1}{T}\myint{-T/2}{T/2}{x_i(t)\cdot x_i(t+\tau)}{t}}$\\[0.35cm]
+				\hline
+				\end{tabular}
+\newpage
+			\subsection{Zeitmittelwerte einer Schar von Funktionen}
+				Werden die zeitlichen Mittelwerte für den gesammten Zufallsprozess $X(t)$ (über die ganze Schar von Probefunktionen) bestimmt, so sind \textbf{$\overline{x}$ und $\overline{R}_{XX}(\tau)$ Zufallsvariabeln}, deren Wert davon aghängt, welche Probefunktion $x_i(t)$ verwendet wurde.\\[0.2cm]
+				\textbf{Stationäre Prozesse (WSS):}\\[0.2cm]
+				Bei stationären Prozessen stimmen die Erwartungswerte der zeitlich gemittelten Funktionen mit den zeitunabhängigen Scharmittelwerten überein.\\[0.2cm]
+				\fcolorbox{CadetRed}{white}{$\begin{array}{lcl} E[\overline{x}] & = & \mylim{t\to\infty}{\frac{1}{T}\myint{-T/2}{T/2}{E[x(t)]}{t}} = \mylim{t\to\infty}{\frac{1}{T}\myint{-T/2}{T/2}{\mu_X}{t}} = \mu_X\\ E[\overline{R}_{XX}(\tau)] & = & \mylim{t\to\infty}{\frac{1}{T}\myint{-T/2}{T/2}{E[x(t)\cdot x(t+\tau)]}{t}} = \mylim{t\to\infty}{\frac{1}{T}\myint{-T/2}{T/2}{R_{XX}(\tau)}{t}} = R_{XX}(\tau)\end{array}$}
+
+		\section{Stationarität}
+			Ein stationärer Prozess verändert seine statistischen Eigenschaften aufgrund einer zeitlichen Verschiebung nicht.
+
+			\subsection{Schwach stationärer Zufallsprozess (Wide-Sense Stationary (WSS))}
+				Ein Zufallsprozess ist schwach stationär, wenn seine statischen Eigenschaften im $2-$dimensionalen unabhängig von einer beliebigen zeitlichen Verschiebung $c$ sind.\\[0.2cm]
+				\fcolorbox{CadetRed}{white}{$f_{X}(x_1,x_2;t_1,t_2) = f_{X}(x_1,x_2;t_1+c,t_2+c)$}$\quad \rightarrow\quad$ Stationarität $2-$ter Ordnung!\\[0.3cm]
+				\textbf{Wichtige Eigenschaften:}\\[0.2cm]
+				\begin{tabularx}{1.2\textwidth}{p{0.1cm} p {3.8cm} p{7cm} X}
+					$\bullet$ & Mittelwert: & $E[X(t)] = \mu_X$ & konstant \\[0.25cm]
+					$\bullet$ & Statistische Leistung: & $E[X^2(t)] = R_{XX}(0)$ &  konstant\\[0.25cm]
+					$\bullet$ & Autokorrelation: & $R_{XX}(t_1,t_2) = R_{XX}(\tau)$ & $\tau = t_2-t_1$ nur Zeit\textbf{differenz}abhängig \\[0.25cm]
+					$\bullet$ & Autokovarianz: & $C_{XX}(t_1,t_2) = C_{XX}(\tau) = R_{XX}(\tau) - \mu_X^2$ & $\tau = t_2-t_1$ nur Zeit\textbf{differenz}abhängig\\[0.25cm]
+				\end{tabularx}
+
+				\fcolorbox{CadetRed}{white}{$\begin{array}{c}\text{Erwartungswert $E[X(t)] = konst.\quad \cap\quad $ Autokorrelationsfunktion $R_{XX}(t_1,t_2) = R_{XX}(\tau)$}\\[0.2cm]\text{$\Rightarrow\quad$ Zufallsprozess $X(t)$ ist schwach stationär}\end{array}$}\\[-0.1cm]
+
+				\textbf{Verbund schwach stationär}\\[0.1cm]
+				 Die Zufallsprozesse $X(t),\, Y(t)$ sind Verbund schwach stationär, wenn:\\[0.1cm]
+				$-$ $X(t)$ und $Y(t)$ schwach stationär sind\\[0.1cm]
+				$-$ $R_{XY}(t,t+\tau) = E[X(t)Y(t+\tau)] = R_{XY}(\tau)$\\[0.1cm]
+				$\rightarrow$ $C_{XY}(\tau) = R_{XY}(\tau)-\mu_X\cdot\mu_Y$\\[-0.3cm]
+
+			\subsection{Streng stationärer Zufallsprozess (Strict-Sense Stationary (SSS))}
+				Ein Zufallsprozess ist streng stationär, wenn seine statischen Eigenschaften unabhängig von einer beliebigen zeitlichen Verschiebung $c$ sind.\\[0.2cm]
+				\fcolorbox{CadetRed}{white}{$f_{X}(x_1,x_2,...,x_n;t_1,t_2,...,t_n) = f_{X}(x_1,x_2,...,x_n;t_1+c,t_2+c,...,t_n+c)$}$\quad \rightarrow\quad$ Stationarität $n-$ter Ordnung!\\[0.3cm]
+				\textbf{Wichtige Eigenschaften:}\\[0.2cm]
+				Jeder streng stationäre Zufallsprozess ist auch ein schwach stationär Zufallsprozess\\[0.1cm]
+				$\Rightarrow\quad$ Der Zusammenhang zwischen $X(t)$ und $X(t+\tau)$ ist nur von der \textbf{Zeitdifferenz $\tau$ abhängig!}
+\newpage
+		\section{Ergodizität}
+			Ergodizität ist eine noch viel Stärkere Eigenschaft als die Stationarität. Wenn bei einem stationären Prozess die zeitlichen Mittelwerte $\overline{x_i},\,\overline{R}_{X_iX_i}(\tau)$ \textbf{jeder Musterfunktion $x_i(t)$} gerade den Scharmittelwerten $ \mu_X,\,R_{XX}(\tau)$ entspricht, handelt es sich um einen ergodischen Prozess.\\[0.2cm]
+			\fcolorbox{CadetRed}{white}{$\overline{x_i} = \langle x_i(t)\rangle \stackrel{\mathrm{\text{ergodisch}}} = E[X(t)] = \mu_X$}$\qquad$
+			\fcolorbox{CadetRed}{white}{$\overline{R}_{X_iX_i}(\tau) = \langle x_i(t)\cdot x_i(t+\tau)\rangle \stackrel{\mathrm{\text{ergodisch}}}= E[X(t)\cdot X(t+\tau)] = R_{XX}(\tau)$}\\[0.2cm]
+			Dies erlaubt, aus einer Musterfunktion $x_i(t)$ auf die statistischen Eigenschaften des Ensembles zu schliessen.\\[0.2cm]
+			\textbf{Eigenschaften}
+			\begin{itemize}
+				\item $E[X(t)] = \overline{x} = \langle x(t) \rangle\qquad\qquad\qquad\qquad\,$ DC-Level
+				\item $E[X(t)]^2 = \overline{x}^2 = \langle x(t) \rangle^2 \qquad\qquad\qquad\;\;\;$ DC-Leistung
+				\item $E[X^2(t)] = R_{XX}(0) = \overline{x^2} = \langle x^2(t) \rangle\qquad$ Gesamtleistung
+				\item $\sigma_X^2(t) = \langle x^2(t)\rangle-\langle x(t)\rangle^2\quad\qquad\qquad\quad\;\,$ AC-Leistung
+				\item $\sigma_X(t) = \overline{\sigma_X}\qquad\qquad\qquad\qquad\qquad\qquad\,$ RMS-Level des AC-Signals (Effektivwert)
+			\end{itemize}
+			\textbf{Beispiel:} Bei dem jährlichen Schützenfest sind die durchschnittliche Punktzahl und deren statistische Verteilung jedes Jahr gleich $\rightarrow$ stationärer Prozess.\\ Ein schlechter Schütze erreicht nie die durchschnittliche Punktzahl $\rightarrow$ kein ergodischer Prozess.
+
+		\section{Korrelation und Leistungsdichtespektrum von stationären Prozessen}
+			\vspace*{-0.7cm}\begin{minipage}[t]{0.35\textwidth}
+				\subsection{Autokorrelation}
+					\vspace*{0.15cm}\fcolorbox{CadetRed}{white}{$R_{XX}(\tau) = E[X(t)\,X(t+\tau)]$}\\[0.2cm]
+					\textbf{Eigenschaften:}\\[-0.4cm]
+					\begin{itemize}
+						\item $R_{XX}(-\tau) = R_{XX}(\tau)$\\[-0.25cm]
+						\item $\left| R_{XX}(\tau)\right| \leq R_{XX}(0)$\\[-0.25cm]
+						\item $R_{XX}(0) = E[X^2(t)]$
+					\end{itemize}
+			\end{minipage}
+			\begin{minipage}[t]{0.65\textwidth}
+				\subsection{Kreuzkorrelation}
+					\vspace*{0.15cm}\fcolorbox{CadetRed}{white}{$R_{XY}(\tau) = E[X(t)\,Y(t+\tau)]$}\\[0.2cm]
+					\textbf{Eigenschaften:}\\[-0.4cm]
+					\begin{itemize}
+						\item $R_{XY}(-\tau) = R_{YX}(\tau)\quad$ (Indizesreihenfolge!)\\[-0.25cm]
+						\item $\left| R_{XY}(\tau)\right| \leq \frac{1}{2}\left[R_{XX}(0) + R_{YY}(0)\right]$\\[-0.25cm]
+						\item $\left| R_{XY}(\tau)\right| \leq \sqrt{R_{XX}(0)\cdot R_{YY}(0)}$\\[-0.25cm]
+						\item $R_{XY}(\tau) = 0 \quad\rightarrow\quad$ Zufallsprozesse sind \textbf{orthogonal} zueinander
+					\end{itemize}
+			\end{minipage}
+			\begin{minipage}{\textwidth}
+				\subsection{Autokovarianz}
+					\vspace*{0.15cm}\fcolorbox{CadetRed}{white}{$C_{XX}(\tau) = E \Big[\Big(X(t) - E[X(t)]\Big) \cdot \Big(X(t+\tau) - E[X(t+\tau)]\Big) \Big] = R_{XX}(\tau) - \mu_X^2 $}\\[0.2cm]
+			\end{minipage}
+			\begin{minipage}{\textwidth}
+				\subsection{Kreuzkovarianz}
+					\vspace*{0.15cm}\fcolorbox{CadetRed}{white}{$C_{XY}(\tau)= E \Big[\Big(X(t) - E[X(t)]\Big) \cdot \Big(Y(t+\tau) - E[Y(t+\tau)]\Big) \Big] = R_{XY}(\tau) - \mu_X\cdot\mu_Y $}\\[0.2cm]
+					\textbf{Eigenschaften:}\\[-0.4cm]
+					\begin{itemize}
+						\item $C_{XY}(\tau) = 0 \quad\rightarrow\quad$ Zufallsprozesse sind \textbf{unkorreliert} zueinander\\[-0cm]
+					\end{itemize}
+			\end{minipage}
+			\begin{minipage}{\textwidth}
+				\subsection{Spektrale Leistung}
+					\vspace*{0.15cm}
+					Die Leistungsspektraldichte ist die mittlere Leistung pro Frequenzband\\[0.2cm]
+					\fcolorbox{CadetRed}{white}{$S_{XX}(\omega) = E\left[\mylim{T\to\infty}{\frac{1}{T}\cdot\left|X(\omega)\right|^2}\right] = \mylim{T\to\infty}{\frac{1}{T}\cdot E\left[\left|X(\omega)\right|^2\right]}$}\\[0.4cm]
+					\textbf{Eigenschaften:}\\[-0.4cm]
+					\begin{itemize}
+						\item $S_{XX}(\omega)$ ist reellwertig \\[-0.25cm]
+						\item $S_{XX}(\omega)\geq 0$ \\[-0.25cm]
+						\item $S_{XX}(-\omega) = S_{XX}(\omega)$\\[-0.25cm]
+						\item Mittlere Leistung des Zufallsprozess $X(t)$:$\quad E[X^2(t)] = \frac{1}{2\pi}\,\myint{-\infty}{\infty}{S_{XX}(\omega)}{\omega} = R_{XX}(0)$
+					\end{itemize}
+			\end{minipage}
+			\begin{minipage}{\textwidth}
+					Es gilt das \textbf{Wiener-Kinchin-Theorem}:\\[0.2cm]
+					\fcolorbox{CadetRed}{white}{$\begin{array}{lcl} R_{XX}(\tau)\FT S_{XX}(\omega) &&\text{Fouriertransformationspaar} \\[0.1cm] S_{XX}(\omega) = \myint{-\infty}{\infty}{R_{XX}(\tau)\cdot \e^{-j\omega\tau}}{\tau} & & \text{Fouriertransformierte der Autokorrelation}\\[0.1cm] R_{XX}(\tau) = \frac{1}{2\pi}\,\myint{-\infty}{\infty}{S_{XX}(\omega)\cdot \e^{j\omega\tau}}{\omega} & & \text{Fourierrücktransformierte des Leistungsdichtespektrum}\end{array}$}\\[0.4cm]
+					\textbf{Kreuzspektraldichte:}\\[0.1cm]
+					Die Kreuzspektraldichte zeigt Abhängigkeiten von zwei Zufallsprozessen $X(t),\,Y(t)$ im Frequenzbereich auf.\\[-0.3cm]
+					\begin{itemize}
+						\item $S_{XY}(\omega) = \myint{-\infty}{\infty}{R_{XY}(\tau)\cdot \e^{-j\omega\tau}}{\tau}$\\[-0.15cm]
+						\item $S_{YX}(\omega) = \myint{-\infty}{\infty}{R_{YX}(\tau)\cdot \e^{-j\omega\tau}}{\tau}$\\[-0.15cm]
+						\item $R_{XY}(\tau) = \frac{1}{2\pi}\,\myint{-\infty}{\infty}{S_{XY}(\omega)\cdot \e^{j\omega\tau}}{\omega}$\\[-0.15cm]
+						\item $R_{YX}(\tau) = \frac{1}{2\pi}\,\myint{-\infty}{\infty}{S_{YX}(\omega)\cdot \e^{j\omega\tau}}{\omega}$\\[-0.15cm]
+						\item $R_{XY}(\tau) = R_{YX}(-\tau)$\\[-0.15cm]
+						\item $S_{XY}(\omega) = S_{YX}(-\omega) = S_{YX}^*(\omega)$
+					\end{itemize}
+			\end{minipage}$ $\\[0.1cm]
+
+		\section{Übertragung von Zufallsprozessen über LTI-Systeme}
+			\begin{minipage}{0.33\textwidth}
+				\begin{tikzpicture}[>=latex', scale=1]
+					\draw[->,line width=1](-2.5,0)--node[above]{$X(t)$}node[below]{$x_i(t)$}(-1.2,0);
+					\draw[->,line width=1](1.2,0)--node[above]{$Y(t)$}node[below]{$y_i(t)$}(2.5,0);
+					\draw[line width=1](-1.2,-0.7)--(-1.2,0.7)--(1.2,0.7)--(1.2,-0.7)--(-1.2,-0.7)node at (0,0.25){LTI-System}node at (0,-0.25){$h(t)$};
+				\end{tikzpicture}
+			\end{minipage}
+			\begin{minipage}{0.68\textwidth}
+				Der Ausgangszufallsprozess $Y(t)$ berechnet sich aus dem Eingangs-zufallsprozess $X(t)$ folgendermassen:\\[0.2cm]
+				\fcolorbox{CadetRed}{white}{$Y(t) = h(t)\ast X(t) = \myint{-\infty}{\infty}{h(\alpha)\cdot X(t-\alpha)}{\alpha}$}\\[0.2cm]
+				Wenn $X(t)$ stationär (WSS) $\quad\rightarrow\quad$ $Y(t)$ ist auch stationär (WSS)
+			\end{minipage}
+			\begin{tabular}{ll}
+				\textbf{Erwartungswert} &\\[0.1cm]
+				Allgemein: & $\mu_Y(t) = h(t)\ast \mu_X(t)$\\[0.2cm]
+				stationär Prozess (WSS):& $\mu_Y = H(0)\cdot \mu_X$ \\[0.2cm]
+			\hline&\\[-0.3cm]
+				\textbf{Mittlere Leistung:} &\\
+				stationär Prozess (WSS):& $E[Y^2(t)] = R_{YY}(0) = \frac{1}{2\pi}\,\myint{-\infty}{\infty}{\left|H(\omega)\right|^2\cdot S_{XX}(\omega)}{\omega}$\\[0.2cm]
+			\hline&\\[-0.3cm]
+				\textbf{Autokorrelation} & \\
+				Allgemein: & $R_{YY}(t_1,t_2) = \myint{-\infty}{\infty}{\myint{-\infty}{\infty}{h(\alpha)\,h(\beta)\, R_{XX}(t_1-\alpha,t_2-\beta)}{\alpha}}{\beta}$\\[0.2cm]
+				stationär Prozess (WSS):& $R_{YY}(\tau) = \myint{-\infty}{\infty}{\myint{-\infty}{\infty}{h(\alpha)\,h(\beta)\, R_{XX}(\tau+\alpha-\beta)}{\alpha}}{\beta}$\\[0.2cm]
+				& $R_{YY}(\tau) = \frac{1}{2\pi}\,\myint{-\infty}{\infty}{\left|H(\omega)\right|^2\cdot S_{XX}(\omega)\cdot\e^{j\omega \tau}}{\omega}$\\[0.2cm]
+			\hline&\\[-0.3cm]
+				\textbf{Leistungsspektraldichte:} & \\
+				stationär Prozess (WSS):& $S_{YY}(\omega) = \myint{-\infty}{\infty}{R_{YY}(\tau)\cdot\e^{-j\omega\tau}}{\tau}$\\[0.2cm]
+				& $S_{YY}(\omega) = H^\ast(\omega)\cdot H(\omega) \cdot S_{XX}(\omega) = \left|H(\omega)\right|^2\cdot S_{XX}(\omega)$\\
+			\end{tabular}
+\newpage
+		\section{Spezielle Zufallsprozesse}
+			\subsection{Gauss'scher Zufallsprozess}
+				Bei einem Gauss'schen Zufallsprozess ist die \textbf{Zufallsvariable $X(t_i)$ zu jedem Zeitpunkt $t_i$ gaussverteilt.}\\[0.1cm]
+				\textbf{Eigenschaften:}\\[-0.6cm]
+				\begin{itemize}
+					\item Vollständig charakterisiert durch $\mu_X(t)$ und $R_{XX}(t_1,t_2)$\\[-0.6cm]
+					\item Ist er schwach stationär (WSS) so ist er zugleich auch stark stationär (SSS)\\[-0.6cm]
+					\item Ist $X(t)$ ein gauss'scher Zufallsprozess am Eingang eines LTI-System, so ist auch der Ausgangszufallsprozess $Y(t)$ gaussisch.\\[-0.6cm]
+					\item Ist $X(t_1)$ und $X(t_2)$ unkorreliert $(C_{XX}(t_1,t_2) = 0)$ so gilt:$\quad f_{XX}(x_1,x_2;t_1,t_2) = f_X(x_1;t_1)\cdot f_X(x_2;t_2)$\\[-0.6cm]
+					\item gauss'sche Verbundwahrscheinlichkeitsdichtefunktion (2D)\\[0.1cm]
+						$f_{XX}(x_1,x_2;t_1,t_2) = \dfrac{1}{2\pi\sigma_{x_1}\sigma_{x_2}}\cdot \e^{\frac{-(x_1-\mu_{x_1})^2}{2\sigma_{x_1}^2}}\cdot \e^{\frac{-(x_2-\mu_{x_2})^2}{2\sigma_{x_2}^2}}$
+				\end{itemize}
+% 				\textbf{Beispiel:} Thermisches Rauschen von Widerständen.
+
+			\subsection{Weisses Rauschen}
+				\begin{minipage}[t]{0.42\textwidth}
+					\textbf{Weisses Rauschen}\\[0.2cm]
+				\begin{minipage}{0.4\textwidth}
+					Leistungsspektraldichte:\\[0.2cm]
+					\fcolorbox{CadetRed}{white}{$S_{XX}(\omega) = \dfrac{\eta}{2}$}\\
+				\end{minipage}
+				\begin{minipage}{0.25\textwidth}
+					\begin{tikzpicture}[>=latex', scale=1]
+						\draw[->][line width=0.75](0,-0.3)--(0,1.5)node[right]{\footnotesize$S_{XX}(\omega)$};
+						\draw[->][line width=0.75](-1.5,0)--(1.5,0)node[below]{\footnotesize$\omega$};
+						\draw[line width=1,CadetRed](-1.5,0.7)--node[above left]{\footnotesize$\frac{\eta}{2}$}(1.5,0.7);
+					\end{tikzpicture}
+				\end{minipage}
+
+				\begin{minipage}{0.46\textwidth}
+					Autokorrelation:$\qquad$\\[0.2cm]
+					\fcolorbox{CadetRed}{white}{$R_{XX}(\tau) = \dfrac{\eta}{2}\cdot \delta(\tau)$}\\
+				\end{minipage}
+				\begin{minipage}{0.25\textwidth}
+					\begin{tikzpicture}[>=latex', scale=1]
+						\draw[->][line width=0.75](0,-0.3)--(0,1.5)node[right]{\footnotesize$S_{XX}(\omega)$};
+						\draw[->][line width=0.75](-0.5,0)--(0.7,0)node[below]{\footnotesize$\omega$};
+						\draw[->,line width=1,CadetRed](0,0)--(0,1)node[left]{\footnotesize$\frac{\eta}{2}\delta(t)$};
+					\end{tikzpicture}
+				\end{minipage}
+				\end{minipage}
+				\hspace*{-0.8cm}\begin{minipage}[t]{0.68\textwidth}
+					\textbf{Bandbeschränktes Weisses Rauschen}\\[0.2cm]
+				\begin{minipage}{0.4\textwidth}
+					Leistungsspektraldichte: $\qquad$\\[0.2cm]
+					\fcolorbox{CadetRed}{white}{$S_{XX}(\omega) = \begin{cases}\frac{\eta}{2} & |\omega|\leq\omega_B\\ 0 & |\omega|>\omega_B \end{cases}$}\\
+				\end{minipage}
+				\begin{minipage}{0.25\textwidth}
+					\begin{tikzpicture}[>=latex', scale=1]
+						\draw[->][line width=0.75](0,-0.3)--(0,1.5)node[right]{\footnotesize$S_{XX}(\omega)$};
+						\draw[->][line width=0.75](-1.5,0)--(1.7,0)node[below]{\footnotesize$\omega$};
+						\draw[line width=1,CadetRed](-1.5,0)--(-1,0)--(-1,0.7)--node[above left]{\footnotesize$\frac{\eta}{2}$}(1,0.7)--(1,0)--(1.5,0);
+						\draw[line width=0.5](-1,0.1)--(-1,-0.1)node[below]{\footnotesize-$\omega_B$};
+						\draw[line width=0.5](1,0.1)--(1,-0.1)node[below]{\footnotesize$\omega_B$};
+					\end{tikzpicture}
+				\end{minipage}\\[-0.35cm]
+
+				\begin{minipage}{0.7\textwidth}
+					Autokorrelation:$\qquad$\\[0.2cm]
+					\fcolorbox{CadetRed}{white}{$R_{XX}(\tau) = \dfrac{1}{2\pi}\myint{-\omega_B}{\omega_B}{\dfrac{\eta}{2}\cdot \e^{j\omega \tau}}{\omega} = \dfrac{\eta\,\omega_B}{2\pi}\cdot\dfrac{\sin(\omega_B\,\tau)}{\omega_B\,\tau}$}\\
+				\end{minipage}
+				\begin{minipage}{0.25\textwidth}
+					\begin{tikzpicture}[>=latex', scale=1]
+						\draw[->][line width=0.75](0,-0.3)--(0,1.5)node[right]{\footnotesize$S_{XX}(\omega)$};
+						\draw[->][line width=0.75](-1.5,0)--(1.7,0)node[below]{\footnotesize$\omega$};
+						\draw[smooth,samples=100,domain=-1.5:1.51, CadetRed, line width=0.75 ] plot (\x,{0.15*sin(2.2*180*\x)/\x});
+						\draw[line width=0.5](-0.91,0.1)--(-0.91,-0.1)node[below]{\footnotesize-$\frac{\pi}{\omega_B}$};
+						\draw[line width=0.5](0.91,0.1)--(0.91,-0.1)node[below]{\footnotesize$\frac{\pi}{\omega_B}$};
+						\draw[line width=0.5](0.1,1.035)--(-0.1,1.035)node[left]{\footnotesize$\frac{\eta \omega_B}{2\pi}$};
+					\end{tikzpicture}
+				\end{minipage}
+				\end{minipage}\\[-0.4cm]
+
+			\subsection{Schmalbandiger Zufallsprozess}\label{schmalband ZP}
+				\textbf{Bandbeschränktes weisses Rauschen} mit sehr kleiner Bandbreite $2B$ bzw. $2W$, \textbf{verteilt um $\pm\omega_c$} kann als Zufallsprozess folgendermassen dargestellt werden:\\[0.2cm]
+				\fcolorbox{CadetRed}{white}{$X(t) = V(t) \cdot \cos(\omega_c t + \phi(t))$} $\qquad\begin{array}{ll} V(t) & \text{Zufallsprozess der Enveloppen-Funktion}\\\phi(t) & \text{Zufallsprozess der Phasenfunktion}\end{array}$\\[0.2cm]
+				\begin{minipage}{0.55\textwidth}
+					$X(t)$ kann umgeformt werden zu (Additionstheorem):\\[0.2cm]
+	% 				$\begin{array}{lcl} X(t) &  = & V(t) \cdot \cos(\omega_c t + \phi(t))\\& = & V(t) \cdot \cos(\phi(t))\cdot\cos(\omega_c t) - V(t) \cdot \sin(\phi(t))\cdot\sin(\omega_c t)\\& = & X_c(t) \cdot\cos(\omega_c t) - X_s(t)\cdot\sin(\omega_c t) \end{array}$\\[0.2cm]
+					\fcolorbox{CadetRed}{white}{$X(t) = X_c(t) \cdot\cos(\omega_c t) - X_s(t)\cdot\sin(\omega_c t)$}\\[0.2cm]
+					$\quad\begin{array}{ll} X_c(t) = V(t)\cdot\cos(\phi(t)) & \quad\text{Gleichphasiger-Anteil}\\[0.2cm] X_s(t) = V(t)\cdot\sin(\phi(t)) & \quad\text{Quadratur-Anteil}\\[0.2cm] V(t) = \sqrt{X_c^2(t) + X_s^2(t)} & \\[0.2cm] \phi(t) = \arctan \left(\dfrac{X_s(t)}{X_c(t)}\right)& \end{array}$
+				\end{minipage}
+				\begin{minipage}{0.45\textwidth}
+					\begin{tikzpicture}[>=latex', scale=1]
+						\begin{scope}[shift={(5.5,0)}]
+						\draw[->][line width=0.75](0,-0.5)--(0,1.5)node[right]{\footnotesize$S_{XX}(\omega)$};
+						\draw[->][line width=0.75](-3,0)--(3,0)node[below]{\footnotesize$\omega$};
+						\begin{scope}[shift={(1.8,0)}]
+						\draw[CadetRed, line width=1](-0.3,0)--(0,1)--(0.3,0);
+						\draw[line width=0.75](0,0.1)--(0,-0.1)node[below]{\footnotesize$\omega_c$};
+						\draw[line width=0.5](-0.3,-0.5)--(-0.3,-0.8);
+						\draw[line width=0.5](0.3,-0.5)--(0.3,-0.8);
+						\draw[line width=0.5,<->](-0.3,-0.7)--node[below]{\footnotesize$2W$}(0.3,-0.7);	
+						\end{scope}
+						\begin{scope}[shift={(-1.8,0)}]
+						\draw[CadetRed, line width=1](-0.3,0)--(0,1)--(0.3,0);
+						\draw[line width=0.75](0,0.1)--(0,-0.1)node[below]{\footnotesize-$\omega_c$};
+						\draw[line width=0.5](-0.3,-0.5)--(-0.3,-0.8);
+						\draw[line width=0.5](0.3,-0.5)--(0.3,-0.8);
+						\draw[line width=0.5,<->](-0.3,-0.7)--node[below]{\footnotesize$2W$}(0.3,-0.7);				
+						\end{scope}
+						\end{scope}
+					\end{tikzpicture}
+				\end{minipage}
+
+				\textbf{Eigenschaften von $X_c(t)$ und $X_s(t)$}\\[-0.5cm]
+				\begin{itemize}
+					\item $S_{X_cX_c}(\omega) = S_{X_sX_s}(\omega) = \begin{cases}S_{XX}(\omega-\omega_c) + S_{XX}(\omega + \omega_c) & |\omega|\leq W\\ 0 & |\omega|> W\end{cases}$\\[-0.3cm]
+					\item Bei $X_c(t)$ und $X_s(t)$ handelt es sich um bandbeschränktes Rauschen im Basisband\\[-0.6cm]
+					\item Sie haben gleicher Erwartungswert und Varianz wie $X(t)$:$\quad$
+						$\mu_{X_c} = \mu_{X_s} = \mu_{X} = 0\qquad \sigma_{X_c}^2 = \sigma_{X_s}^2 = \sigma_{X}^2$\\[-0.6cm]
+					\item Sie sind unkorreliert und orthogonal zueinander: $\quad E[X_c(t)\,X_s(t)] = 0$\\[-0.6cm]
+					\item Wenn $X(t)$ ein gauss'scher Prozess ist, dann\\[-0.65cm]
+					\begin{itemize}
+						\item $X_c(t)$ und $X_s(t)$ auch gaussisch\\[-0.65cm]
+						\item $V(t)$ Rayleigh-verteilt zu jedem Zeitpunkt $t$\\[-0.65cm]
+						\item $\phi(t)$ gleichverteilt $(0...2\pi)$ zu jedem Zeitpunkt $t$
+					\end{itemize}
+				\end{itemize}
+

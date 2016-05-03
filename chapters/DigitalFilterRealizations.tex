@@ -1,0 +1,430 @@
+% 
+% (c) Copyright 2016 Tabea Mendez
+% 
+% This source is free: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This source is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this source.  If not, see <http://www.gnu.org/licenses/>.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Direktform}  
+	\begin{itemize}
+	 \item Blockdiagramm kann direkt aus der I/O Differenzengleichung aufgezeichnet werden.\\[-0.6cm]
+ 	 \item Es sind sehr viele Speicherstellen notwendig.\\[-0.6cm]
+	 \item Innere Zustände ($v_i,w_i$) definieren, damit der Ausgang aus dem aktuellen Eingang und den Zuständen berechnet werden kann. \\[-0.6cm]
+	 \item Innere Zustände mit Null initialisieren $v_i = 0$ und $w_i = 0$
+	\end{itemize}
+	\begin{minipage}{0.57\textwidth}
+		\textbf{Übertragungsfunktion}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$H(z) = \dfrac{N(z)}{D(z)} = \dfrac{b_0 + b_1\,z^{-1} + b_2\,z^{-2} + \dots + b_N\,z^{-N} }{1 + a_1\,z^{-1} + a_2\,z^{-2} + \dots + a_M\,z^{-M} }$}\\[0.4cm]
+		\textbf{I/O Differenzengleichung}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$\begin{array}{ll}y(n)=&\;\big[b_0\,x(n) + b_1\,x(n-1)+ ... + b_N\,x(n-N)\big]\\[0.15cm] &\!\!\! - \big[a_1\,y(n-1)+ ... + a_M\,y(n-M)\big]\end{array}$}\\[0.4cm]
+		\textbf{Algorithmus}\\[0.2cm]
+		\begin{tabular}{|lclll|}
+		 \hline &&&&$ $\\[-0.3cm]
+		 \multicolumn{5}{|l|}{for each input $x$ do:}\\
+		  &$v_0$&$ =$& $x$&\\
+		  &$w_0$&$ = $&\multicolumn{2}{l|}{$b_0v_0 + b_1v_1 + \hdots + b_Nv_N - a_1w_1- \hdots  - a_Mw_M$}\\
+		  &$y$&$ =$&$ w_0$&\\
+		  &$v_i$&$ =$&$ v_{i-1}$ & $\qquad \quad i = N,N-1,\hdots,1$\\
+		  &$w_i$& $=$&$ w_{i-1}$ & $\qquad \quad i = M,M-1,\hdots,1$\\[0.1cm]
+		 \hline
+		\end{tabular}
+	\end{minipage}
+	\begin{minipage}{0.43\textwidth}
+		\begin{danger}
+		$v_0$ und $w_0$ sind keine Zustände, sondern Ein- und Ausgangssignal.
+		\end{danger}$ $\\
+		
+		\begin{tikzpicture}[>=latex', scale=1.1]
+			\def\s{0.3};
+			\def\l{1};
+			\def\r{0.17};
+			\def\dis{0.8};
+
+			\coordinate (h1) at (0,0);
+			\draw[line width=1,->](h1)++(0,-0.675)node[above right]{\footnotesize$x(n)=v_0$}--++(3.5-\r,0);
+			\draw[line width=1,->](h1)++(3.5+\r,-0.675)--++(3.5-\r,0)node[above left]{\footnotesize$w_0=y(n)$};
+
+			\foreach \i in {2,4,7}
+			{
+				\coordinate (h1) at (1,-\i/1.5);
+				\draw[line width=1,fill=white](h1)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h1)[xshift=0pt]{\footnotesize$z^{-1}$};
+				\draw[line width=1,->](h1)++(0,0.675)--++(0,-0.38);
+				\draw[line width=1,->](h1)++(0,-0.3)--++(0,-0.365)--++(2.5-\r,0);
+
+				\coordinate (h1) at (6,-\i/1.5);
+				\draw[line width=1,fill=white](h1)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h1)[xshift=0pt]{\footnotesize$z^{-1}$};
+				\draw[line width=1,->](h1)++(0,0.675)--++(0,-0.38);
+				\draw[line width=1,->](h1)++(0,-0.3)--++(0,-0.365)--++(-2.5+\r,0);
+			}
+
+			\foreach \i in {2,4,6,9}
+			{
+				\coordinate (h1) at (2,{-(-1+\i)/1.5});
+				\draw[line width=1,fill=white](h1)++(0,0)--++(0,1.2*\s)--++(2.2*\s,-1.2*\s)--++(-2.2*\s,-1.2*\s)--cycle;
+			}
+
+			\foreach \i in {4,6,9}
+			{
+				\coordinate (h1) at (5,{-(-1+\i)/1.5});
+				\draw[line width=1,fill=white](h1)++(0,0)--++(0,1.2*\s)--++(-2.2*\s,-1.2*\s)--++(2.2*\s,-1.2*\s)--cycle;
+			}
+
+			\foreach \i in {2,4,6,9}
+			{
+				\coordinate (h1) at (3.5,{-(-1+\i)/1.5});
+				\draw[line width=1,fill=white](h1)circle(\r)node{\Large$+$};
+			}
+
+			\foreach \i in {2,4,6,9}
+			{
+				\coordinate (h1) at (3.5,{-(-1+\i)/1.5});
+				\draw[line width=1,fill=white](h1)circle(\r)node{\Large$+$};
+			}
+			\foreach \i in {4,6}
+			{
+				\coordinate (h1) at (3.5,{-(-1+\i)/1.5});
+				\draw[line width=1](h1)++(0,\r)--++(0,0.5);
+			}
+			\coordinate (h1) at (3.5,{-(-1+9)/1.5});
+			\draw[line width=1,->](h1)++(0,\r)--++(0,0.5)node[above=2pt]{$\vdots$};
+			\foreach \i in {2,4,6}
+			{
+				\coordinate (h1) at (3.5,{-(-1+\i)/1.5});
+				\draw[line width=1,->](h1)++(0,-0.5-\r)--++(0,0.5);
+			}
+
+			% x verzoegerungen
+			\coordinate (h1) at (1,-4/1.5);
+			\draw[line width=1](h1)++(0,0.675)node[left=3pt]{\footnotesize$v_1$};
+			\coordinate (h1) at (1,-6/1.5);
+			\draw[line width=1,->](h1)++(0,0.675)node[left=3pt]{\footnotesize$v_2$}--++(0,-0.3)node[yshift=-2.5pt]{$\vdots$};
+			\coordinate (h1) at (1,-9/1.5);
+			\draw[line width=1](h1)++(0,0.675)node[left=3pt]{\footnotesize$v_N$};
+
+			% y verzoegerungen
+			\coordinate (h1) at (6,-4/1.5);
+			\draw[line width=1](h1)++(0,0.675)node[right=3pt]{\footnotesize$w_1$};
+			\coordinate (h1) at (6,-6/1.5);
+			\draw[line width=1,->](h1)++(0,0.675)node[right=3pt]{\footnotesize$w_2$}--++(0,-0.3)node[yshift=-2.5pt]{$\vdots$};
+			\coordinate (h1) at (6,-9/1.5);
+			\draw[line width=1](h1)++(0,0.675)node[right=3pt]{\footnotesize$w_M$};
+
+			% B-Koeffizienten
+			\coordinate (h1) at (2,{-(-1+2)/1.5});
+			\draw[line width=1,fill=white](h1)node[right=-1pt]{\footnotesize$b_0$};
+			\coordinate (h1) at (2,{-(-1+4)/1.5});
+			\draw[line width=1,fill=white](h1)node[right=-1pt]{\footnotesize$b_1$};
+			\coordinate (h1) at (2,{-(-1+6)/1.5});
+			\draw[line width=1,fill=white](h1)node[right=-1pt]{\footnotesize$b_2$};
+			\coordinate (h1) at (2,{-(-1+9)/1.5});
+			\draw[line width=1,fill=white](h1)node[right=-1pt]{\footnotesize$b_N$};
+
+			% A-Koeffizienten
+			\coordinate (h1) at (5,{-(-1+4)/1.5});
+			\draw[line width=1,fill=white](h1)node[left=-3pt]{\footnotesize-$a_1$};
+			\coordinate (h1) at (5,{-(-1+6)/1.5});
+			\draw[line width=1,fill=white](h1)node[left=-3pt]{\footnotesize-$a_2$};
+			\coordinate (h1) at (5,{-(-1+9)/1.5});
+			\draw[line width=1,fill=white](h1)node[left=-4pt]{\footnotesize-$a_M$};
+
+		\end{tikzpicture}
+	\end{minipage}
+	
+\section{Kanonische Form}
+	\begin{itemize}
+	 \item Die Kanonische Form kann aus der Direktform abgeleitet werden. Dazu muss die rechte und linke Seite des Blockdiagrammes getauscht werden.\\[-0.6cm]
+	 \item Es sind viel weniger Speicherstellen notwendig.\\[-0.6cm]
+	 \item Innere Zustände ($w_i$) definieren, damit der Ausgang aus dem aktuellen Eingang und den Zuständen berechnet werden kann. \\[-0.6cm]
+	 \item Innere Zustände mit Null initialisieren $w_i = 0$
+	\end{itemize}
+	\begin{minipage}{0.57\textwidth}
+		\textbf{Übertragungsfunktion}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$H(z) = \dfrac{N(z)}{D(z)} = \dfrac{b_0 + b_1\,z^{-1} + b_2\,z^{-2} + \dots + b_N\,z^{-N} }{1 + a_1\,z^{-1} + a_2\,z^{-2} + \dots + a_M\,z^{-M} }$}\\[0.4cm]
+		\textbf{I/O Differenzengleichung}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$\begin{array}{lcl}
+		w(n)& = & x(n) - a_1\,w(n-1)- ... - a_M\,w(n-M)\\[0.2cm]
+		y(n)&=& b_0\,w(n) + b_1\,w(n-1)+ ... + b_N\,w(n-N)\end{array}$}\\[0.4cm]
+		\textbf{Algorithmus}\\[0.2cm]
+		\begin{tabular}{|lclll|}
+		 \hline &&&&$ $\\[-0.3cm]
+		 \multicolumn{5}{|l|}{for each input $x$ do:}\\
+		  &$w_0$&$ = $&\multicolumn{2}{l|}{$x - a_1w_1 - a_2w_2 - \hdots  - a_Mw_M$}\\[0.05cm]
+		  &$y$&$ =$&\multicolumn{2}{l|}{$b_0w_0 + b_1w_1 + b_2w_2 + \hdots + b_Nw_N$}\\[0.05cm]
+		  &$w_i$& $=$&$ w_{i-1}$ & $\qquad\quad i = K,K-1,\hdots,1$\\[0.05cm]
+		  & & & & $\qquad\quad K = \max\{N,M\}$\\[0.1cm]
+		 \hline
+		\end{tabular}
+	\end{minipage}
+	\begin{minipage}{0.43\textwidth}
+		\begin{tikzpicture}[>=latex', scale=1.1]
+			\def\s{0.3};
+			\def\dx{0.25};
+			\def\r{0.17};
+
+			\coordinate (h1) at (0,0);
+			\draw[line width=1,->](h1)++(0,-0.675)node[above right]{\footnotesize$x(n)$}--++(1-\r,0);
+			\draw[line width=1,->](h1)++(1+\r,-0.675)--++(5-2*\r,0);
+			\draw[line width=1,->](h1)++(3.5+\r,-0.675)--++(3.5-\r,0)node[above left]{\footnotesize$y(n)$};
+			
+			%verzoegerer
+			\foreach \i in {2,4}
+			{
+				\coordinate (h1) at (3.5,-\i/1.5);
+				\draw[line width=1,fill=white](h1)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h1)[xshift=0pt]{\footnotesize$z^{-1}$};
+				\draw[line width=1,->](h1)++(0,0.675)--++(0,-0.38);
+				\draw[line width=1,->](h1)++(0,-0.3)--++(0,-0.365)--++(2.5-\r,0);
+				\draw[line width=1,->](h1)++(0,-0.3)--++(0,-0.365)--++(-2.5+\r,0);
+			}
+			\coordinate (h1) at (3.5,-7/1.5);
+			\draw[line width=1,fill=white](h1)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h1)[xshift=0pt]{\footnotesize$z^{-1}$};
+			\draw[line width=1,->](h1)++(0,0.675)--++(0,-0.38);
+			\draw[line width=1](h1)++(0,-0.3)--++(0,-0.365)--++(2.5,0)--++(0,0.5);
+			\draw[line width=1](h1)++(0,-0.3)--++(0,-0.365)--++(-2.5,0)--++(0,0.5);
+
+
+		% 	% verstaerker rechts
+			\foreach \i in {2,4,6,9}
+			{
+				\coordinate (h1) at (4.75,{-(-1+\i)/1.5});
+				\draw[line width=1,fill=white](h1)++(-\dx,0)--++(0,1.2*\s)--++(2.2*\s,-1.2*\s)--++(-2.2*\s,-1.2*\s)--cycle;
+			}
+
+			% verstaerker links
+			\foreach \i in {4,6,9}
+			{
+				\coordinate (h1) at (2.25,{-(-1+\i)/1.5});
+				\draw[line width=1,fill=white](h1)++(\dx,0)--++(0,1.2*\s)--++(-2.2*\s,-1.2*\s)--++(2.2*\s,-1.2*\s)--cycle;
+
+			}
+
+			% Addierer rechts
+			\foreach \i in {2,4,6}
+			{
+				\coordinate (h1) at (6,{-(-1+\i)/1.5});
+				\draw[line width=1,fill=white](h1)circle(\r)node{\Large$+$};
+			}
+			\foreach \i in {4,6}
+			{
+				\coordinate (h1) at (6,{-(-1+\i)/1.5});
+				\draw[line width=1](h1)++(0,\r)--++(0,0.5);
+			}
+			\coordinate (h1) at (6,{-(-1+9)/1.5});
+			\draw[line width=1,->](h1)++(0,\r)--++(0,0.5)node[above=2pt]{$\vdots$};
+			\foreach \i in {2,4,6}
+			{
+				\coordinate (h1) at (6,{-(-1+\i)/1.5});
+				\draw[line width=1,->](h1)++(0,-0.5-\r)--++(0,0.5);
+			}
+			% Addierer links
+			\foreach \i in {2,4,6}
+			{
+				\coordinate (h1) at (1,{-(-1+\i)/1.5});
+				\draw[line width=1,fill=white](h1)circle(\r)node{\Large$+$};
+			}
+			\foreach \i in {4,6}
+			{
+				\coordinate (h1) at (1,{-(-1+\i)/1.5});
+				\draw[line width=1](h1)++(0,\r)--++(0,0.5);
+			}
+			\coordinate (h1) at (1,{-(-1+9)/1.5});
+			\draw[line width=1,->](h1)++(0,\r)--++(0,0.5)node[above=2pt]{$\vdots$};
+			\foreach \i in {2,4,6}
+			{
+				\coordinate (h1) at (1,{-(-1+\i)/1.5});
+				\draw[line width=1,->](h1)++(0,-0.5-\r)--++(0,0.5);
+			}
+
+			% x verzoegerungen
+			\coordinate (h1) at (3.5,-2/1.5);
+			\draw[line width=1](h1)++(0,0.675)node[above=-3pt, xshift=-5pt]{\footnotesize$w(n)=w_0$};
+			\coordinate (h1) at (3.5,-4/1.5);
+			\draw[line width=1](h1)++(0,0.675)node[above right=-2pt]{\footnotesize$w_1$};
+			\coordinate (h1) at (3.5,-6/1.5);
+			\draw[line width=1,->](h1)++(0,0.675)node[above right=-2pt]{\footnotesize$w_2$}--++(0,-0.3)node[yshift=-2.5pt]{$\vdots$};
+			\coordinate (h1) at (3.5,-9/1.5);
+			\draw[line width=1](h1)++(0,0.675)node[above right=-2pt, yshift=-1.2pt]{\footnotesize$w_{M/N}$};
+
+			% B-Koeffizienten
+			\coordinate (h1) at (4.75-\dx,{-(-1+2)/1.5});
+			\draw[line width=1,fill=white](h1)node[right=-1pt]{\footnotesize$b_0$};
+			\coordinate (h1) at (4.75-\dx,{-(-1+4)/1.5});
+			\draw[line width=1,fill=white](h1)node[right=-1pt]{\footnotesize$b_1$};
+			\coordinate (h1) at (4.75-\dx,{-(-1+6)/1.5});
+			\draw[line width=1,fill=white](h1)node[right=-1pt]{\footnotesize$b_2$};
+			\coordinate (h1) at (4.75-\dx,{-(-1+9)/1.5});
+			\draw[line width=1,fill=white](h1)node[right=-1pt]{\footnotesize$b_N$};
+
+			% A-Koeffizienten
+			\coordinate (h1) at (2.25+\dx,{-(-1+4)/1.5});
+			\draw[line width=1,fill=white](h1)node[left=-3pt]{\footnotesize-$a_1$};
+			\coordinate (h1) at (2.25+\dx,{-(-1+6)/1.5});
+			\draw[line width=1,fill=white](h1)node[left=-3pt]{\footnotesize-$a_2$};
+			\coordinate (h1) at (2.25+\dx,{-(-1+9)/1.5});
+			\draw[line width=1,fill=white](h1)node[left=-4pt]{\footnotesize-$a_M$};
+
+		\end{tikzpicture}
+	\end{minipage}
+\newpage
+\section{Kaskaden Form}
+	\begin{itemize}
+	 \item Filter mit reellen Impulsantworten (reelle Koeffizienten) können als kaskadierte Second Order Sections (SOS) geschrieben werden.
+	 \item Eine Second Order Section (IIR-Filter 2. Ordnung) kann in einer beliebigen Form umgesetzt werden. Häufig wird sie jedoch in der Kanonischen Form realisiert.
+	\end{itemize}
+
+	\begin{minipage}{0.42\textwidth}
+		\textbf{Übertragungsfunktion}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$H(z) = \myprod{i=0}{K-1}{H_i(z)} = \myprod{i=0}{K-1}{\;\dfrac{b_{i0} + b_{i1}\,z^{-1} + b_{i2}\,z^{-2}}{1 + a_{i1}\,z^{-1} + a_{i2}\,z^{-2}}}$}\\[0.4cm]
+		\textbf{Faktorisierung in SOS}\\[0.2cm]
+		\fcolorbox{CadetRed}{white}{$H(z) = \dfrac{N(z)}{D(z)} = \myprod{i=0}{K-1}{H_i(z)}$}
+	\end{minipage}
+	\begin{minipage}{0.43\textwidth}
+		\begin{tikzpicture}[>=latex', scale=1.1]
+				\def\s{0.4};
+				\def\r{0.17};
+
+				% H0(z)
+				\coordinate (SOS) at (0,0);
+				\draw[line width=1,fill=white](SOS)++(-1.5*\s,-\s)--++(3*\s,0)--++(0,2*\s)--++(-3*\s,0)--cycle node at(SOS)[xshift=0pt]{\small $H_0(z)$};
+				\draw[line width=0.75,->](SOS)++(-5.5*\s,0)--node[above]{\footnotesize $x(n) = x_0$}++(4*\s,0);
+
+				% H1(z)
+				\coordinate (SOS) at (6*\s,0);
+				\draw[line width=1,fill=white](SOS)++(-1.5*\s,-\s)--++(3*\s,0)--++(0,2*\s)--++(-3*\s,0)--cycle node at(SOS)[xshift=0pt]{\small $H_1(z)$};
+				\draw[line width=0.75,->](SOS)++(-4.5*\s,0)--node[above]{\footnotesize $y_0 = x_1$}++(3*\s,0);
+				\draw[line width=0.75,->](SOS)++(1.5*\s,0)--node[above]{\footnotesize $y_1$}++(1.5*\s,0);
+				\draw[line width=0.75](SOS)++(4.05*\s,0)node{\large$\dots$};
+
+				% Hi(z)
+				\coordinate (SOS) at (14*\s,0);
+				\draw[line width=1,fill=white](SOS)++(-1.5*\s,-\s)--++(3*\s,0)--++(0,2*\s)--++(-3*\s,0)--cycle node at(SOS)[xshift=0pt]{\small $H_i(z)$};
+				\draw[line width=0.75,->](SOS)++(-3*\s,0)--node[above]{\footnotesize $x_i$}++(1.5*\s,0);
+				\draw[line width=0.75,->](SOS)++(1.5*\s,0)--node[above]{\footnotesize $y_i$}++(1.5*\s,0);
+				\draw[line width=0.75](SOS)++(4.05*\s,0)node{\large$\dots$};
+
+				% Lupe
+				\draw[line width=0.5,fill=white](SOS)++(-1.5*\s,-\s)++(-0.15,-0.045)--(-1,-1.5);
+				\draw[line width=0.5,fill=white](SOS)++(-1.5*\s,-\s)--++(3*\s,0)++(-0.01,-0.1)--(6.1,-1.5);
+
+
+
+			\begin{scope}[xshift=-1cm, yshift=-1.5cm]
+				\def\s{0.3};
+				\def\f{1.1};
+				\def\dx{0.25};
+				\def\r{0.17};
+
+				\coordinate (h1) at (0,0);
+				\draw[line width=1,->](h1)++(0,-0.675)node[above right]{\footnotesize$x_i(n)$}--++(1-\r,0);
+				\draw[line width=1,->](h1)++(1+\r,-0.675)--++(5-2*\r,0);
+				\draw[line width=1,->](h1)++(3.5+\r,-0.675)--++(3.5-\r,0)node[above left]{\footnotesize$y_i(n)$};
+				
+				%verzoegerer
+				\coordinate (h1) at (3.5,-2/1.5);
+				\draw[line width=1,fill=white](h1)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h1)[xshift=0pt]{\footnotesize$z^{-1}$};
+				\draw[line width=1,->](h1)++(0,0.675)--++(0,-0.38);
+				\draw[line width=1,->](h1)++(0,-0.3)--++(0,-0.365)--++(2.5-\r,0);
+				\draw[line width=1,->](h1)++(0,-0.3)--++(0,-0.365)--++(-2.5+\r,0);
+				\coordinate (h1) at (3.5,-4/1.5);
+				\draw[line width=1,fill=white](h1)++(-\s,-\s)--++(2*\s,0)--++(0,2*\s)--++(-2*\s,0)--cycle node at(h1)[xshift=0pt]{\footnotesize$z^{-1}$};
+				\draw[line width=1,->](h1)++(0,0.675)--++(0,-0.38);
+				\draw[line width=1](h1)++(0,-0.3)--++(0,-0.365)--++(2.5,0)--++(0,0.6);
+				\draw[line width=1](h1)++(0,-0.3)--++(0,-0.365)--++(-2.5,0)--++(0,0.6);
+
+			% 	% verstaerker rechts
+				\foreach \i in {2,4,6}
+				{
+					\coordinate (h1) at (4.75,{-(-1+\i)/1.5});
+					\draw[line width=1,fill=white](h1)++(-\dx,0)--++(0,1.2*\s*\f)--++(2.2*\s*\f,-1.2*\s*\f)--++(-2.2*\s*\f,-1.2*\s*\f)--cycle;
+				}
+
+				% verstaerker links
+				\foreach \i in {4,6}
+				{
+					\coordinate (h1) at (2.25,{-(-1+\i)/1.5});
+					\draw[line width=1,fill=white](h1)++(\dx,0)--++(0,1.2*\s*\f)--++(-2.2*\s*\f,-1.2*\s*\f)--++(2.2*\s*\f,-1.2*\s*\f)--cycle;
+
+				}
+
+				% Addierer rechts
+				\foreach \i in {2,4}
+				{
+					\coordinate (h1) at (6,{-(-1+\i)/1.5});
+					\draw[line width=1,fill=white](h1)circle(\r)node{\Large$+$};
+				}
+				\foreach \i in {4,6}
+				{
+					\coordinate (h1) at (6,{-(-1+\i)/1.5});
+					\draw[line width=1](h1)++(0,\r)--++(0,0.5);
+				}
+				\foreach \i in {2,4}
+				{
+					\coordinate (h1) at (6,{-(-1+\i)/1.5});
+					\draw[line width=1,->](h1)++(0,-0.5-\r)--++(0,0.5);
+				}
+				% Addierer links
+				\foreach \i in {2,4}
+				{
+					\coordinate (h1) at (1,{-(-1+\i)/1.5});
+					\draw[line width=1,fill=white](h1)circle(\r)node{\Large$+$};
+				}
+				\foreach \i in {4,6}
+				{
+					\coordinate (h1) at (1,{-(-1+\i)/1.5});
+					\draw[line width=1](h1)++(0,\r)--++(0,0.5);
+				}
+				\foreach \i in {2,4}
+				{
+					\coordinate (h1) at (1,{-(-1+\i)/1.5});
+					\draw[line width=1,->](h1)++(0,-0.5-\r)--++(0,0.5);
+				}
+
+				% x verzoegerungen
+				\coordinate (h1) at (3.5,-2/1.5);
+				\draw[line width=1](h1)++(0,0.675)node[above=-3pt, xshift=-5pt]{\footnotesize$w_i(n)=w_{i0}$};
+				\coordinate (h1) at (3.5,-4/1.5);
+				\draw[line width=1](h1)++(0,0.675)node[above right=-2pt]{\footnotesize$w_{i1}$};
+				\coordinate (h1) at (3.5,-6/1.5);
+				\draw[line width=1,](h1)++(0,0.675)node[above right=-2pt]{\footnotesize$w_{i2}$};
+
+				% B-Koeffizienten
+				\coordinate (h1) at (4.75-\dx,{-(-1+2)/1.5});
+				\draw[line width=1,fill=white](h1)node[right=-1pt]{\footnotesize$b_{i0}$};
+				\coordinate (h1) at (4.75-\dx,{-(-1+4)/1.5});
+				\draw[line width=1,fill=white](h1)node[right=-1pt]{\footnotesize$b_{i1}$};
+				\coordinate (h1) at (4.75-\dx,{-(-1+6)/1.5});
+				\draw[line width=1,fill=white](h1)node[right=-1pt]{\footnotesize$b_{i2}$};
+
+
+				% A-Koeffizienten
+				\coordinate (h1) at (2.25+\dx,{-(-1+4)/1.5});
+				\draw[line width=1,fill=white](h1)node[left=-3pt]{\footnotesize-$a_{i1}$};
+				\coordinate (h1) at (2.25+\dx,{-(-1+6)/1.5});
+				\draw[line width=1,fill=white](h1)node[left=-3pt]{\footnotesize-$a_{i2}$};
+			\end{scope}
+
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{itemize}
+		\item Die Nullstellen der beiden reellen Polynome $N(z)$ und $D(z)$ finden.\\[0.2cm]
+		$\begin{array}{lcl}
+		D(z)& =& 1 + a_1\,z^{-1} + a_2\,z^{-2} + \hdots + a_M\,z^{-M}\\
+		& = & (1-p_1z^{-1})\cdot (1-p_2z^{-1}) \hdots (1-p_Mz^{-1})\end{array} $\\
+		\item Konjugiert-Komplexe Pole zusammenfassen $p_2 = p_1^*$\\[0.2cm]
+		$\begin{array}{lcl}
+		(1-p_1z^{-1})\cdot (1-p_2\,z^{-1}) & = & (1 - (p_1+p_2)\,z^{-1} + p_1p_2\,z^{-2})\\
+		& = & (1 - (p_1+p_1^*)\,z^{-1} + p_1p_1^*\,z^{-2})\\
+		& = & (1 - 2\text{Re}(p_1)\,z^{-1} + |p_1|^2\,z^{-2})\\
+		& = & (1 - 2R\cos(\theta)\,z^{-1} + R^2\,z^{-2})\end{array}$\\
+		\item SOS von $D(z)$ und von $N(z)$ nach belieben zusammennehmen.
+	\end{itemize}
